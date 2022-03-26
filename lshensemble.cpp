@@ -3,11 +3,11 @@
 
 LshEnsemble* NewLshEnsemble(Partition *parts, int numHash, int maxK){
 
-    std::vector<Lshforest> lshes;
+    auto lshes = new std::vector<Lshforest>() ;
 	for(int i = 0; i < numPart; i++){ 
-		lshes.push_back({maxK, numHash/maxK, 4});
+		lshes->push_back({maxK, numHash/maxK, 4});
 	}
-	return new LshEnsemble{parts, lshes.data(), maxK, numHash};
+	return new LshEnsemble{parts, lshes->data(), maxK, numHash};
 }
 
 // LshEnsemble NewLshEnsemblePlus(Partition *parts, int numHash, int maxK){
@@ -63,7 +63,7 @@ std::vector<std::string> LshEnsemble::queryWithParam(uint32_t *sig, Param *param
 
 void LshEnsemble::computeParams(Param *params, int size, double threshold){
     Param optP;
-    int x ,p;
+    int x;
     for(int i = 0; i < numPart; i++){
         x = this->partitions[i].upper;
         Key key{x, size, threshold};

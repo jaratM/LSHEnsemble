@@ -7,10 +7,7 @@ constexpr double fracQuery  {0.1};
 constexpr int minDomainSize {10};
 
 
-
-std::vector<rawDomain> rawDomains;
-
-int readDomains(std::string const& dir){
+int readDomains(std::vector<rawDomain> &rawDomains, std::string const& dir){
     int count = 0;
     for (const auto & entry : std::filesystem::directory_iterator(dir)){
         std::ifstream infile(entry.path());
@@ -34,8 +31,6 @@ void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, dou
     std::string linearscanOutput = "../output32/_cod_linearscan_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
 	std::string lshensembleOutput = "../output32/_cod_lshensemble_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
 	std::string accuracyOutput = "../output32/_cod_accuracy_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
-    // std::cout <<*rawDomains[0];
-    std::cout << n << "\n";
     // benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
 	benchmarkLshEnsemble(rawDomains, queries, n, q, threshold, lshensembleOutput);
 	// benchmarkAccuracy(linearscanOutput, lshensembleOutput, accuracy_outpuO;
@@ -43,13 +38,16 @@ void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, dou
 
 }
 int main(int argc, char* argv[]) {
+
+    std::vector<rawDomain> rawDomains;
+
     clock_t begin = clock();
     int numDomains;
     // Running this function requires a `_cod_domains` directory
     // in the current directory.
     // The `_code_domains` directory should contain domains files,
     // which are line-separated files.
-    numDomains = readDomains("../doc_files");
+    numDomains = readDomains(rawDomains, "../doc_files");
 
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
@@ -72,6 +70,7 @@ int main(int argc, char* argv[]) {
             queries[j] = rawDomains_[rand() % subsets[i]];
         }
         // Run benchmark
+        std::cout << "key ---> " << rawDomains_[0].key << "\n";
         std::cout << "start linear scan" << subsets[i] <<"\n";
         benchmarkCOD(rawDomains_, queries, subsets[i], numQuery, threshold, i);
     }

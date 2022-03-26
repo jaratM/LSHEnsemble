@@ -16,8 +16,10 @@ void bootstrapEquiDepth(LshEnsemble *index, int totalNumDomains, domainRecord *s
         if(currSize > sortedDomains[i].size)
             return;
         currSize = sortedDomains[i].size;
-        std::cout << "equidepth initHashTables: " <<index->lshes->initHashTables.size() << "\n";
+        std::cout << sortedDomains[i].key;
+        //std::cout << "equidepth initHashTables: " <<index->lshes->initHashTables.size() << "\n";
 		index->add(sortedDomains[i].key, sortedDomains[i].signatures, currPart);
+        std::cout << sortedDomains[i].key;
 		currDepth++;
 		index->partitions[currPart].upper = sortedDomains[i].size;
 		if( currDepth >= depth && currPart < numPart-1) {

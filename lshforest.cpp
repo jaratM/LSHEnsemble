@@ -18,13 +18,14 @@ Lshforest::Lshforest(int K, int L, int hashValueSize)
 void Lshforest::add(std::string key, uint32_t *sig) {
     // std::cout << "Lshforest::add initHashTables : " <<this->initHashTables.size() << "\n";
     std::string tmp;
-    // std::cout<< sig[0];
+    std::cout<< sig[0] << std::endl;
+    std::cout << key << std::endl;
     for(int i = 0; i < this->l; i++){
-        std::cout << key;
         tmp = this->hashKeyFunc(sig, i, this->k);
+        std::cout << "tmp ===>"<< tmp << std::endl; ;
         // this->initHashTables[i][tmp] = std::vector<std::string>();
-        std::cout << "tmp=" <<this->initHashTables[i]["tmp"].size()<< std::endl;
-        this->initHashTables[i]["tmp"].push_back("key");
+        this->initHashTables[i][tmp].push_back(key);
+        std::cout << "tmp=" <<this->initHashTables[i][tmp].size()<< std::endl;
     }
 }
 
