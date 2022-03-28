@@ -3,8 +3,11 @@
 
 double integral(func f, double a, double b, double precision){
     double area = 0;
-    for(int x = a; x < b; x+=precision)
+	double x = a;
+    while( x < b ){
         area += f(x + 0.5*precision) *precision;
+		x += precision;
+	}
     return area;
 }
 

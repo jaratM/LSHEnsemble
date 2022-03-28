@@ -34,20 +34,20 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     // std::cout << domainRecords[0].signatures[0] << "\n";
     std::cout << "Start building LSH Ensemble index \n";
     LshEnsemble *index = BootstrapLshEnsembleEquiDepth(numPart, numHash, maxK, n, domainRecords);
-    // std::cout << "Finished building LSH Ensemble index \n";
-    // std::cout << "Start querying LSH Ensemble index with "<< q << " queries.\n";
+    std::cout << "Finished building LSH Ensemble index \n";
+    std::cout << "Start querying LSH Ensemble index with "<< q << " queries.\n";
 
-    // std::vector<queryResult> results;
-    // queryResult candidates;
-    // for(int i = 0; i < q; i++){
-    //     candidates = index.query(queries[i].signatures, queries[i].size, threshold);
-    //     candidates.queryKey = queries[i].key;
-    //     results.push_back(candidates);
-    // }
-    // outputQueryResults(results, outputFilename);
-    // std::cout << "Finished querying LSH Ensemble index, output " << outputFilename;
-
-
+    std::vector<queryResult> results;
+    queryResult candidates;
+    for(int i = 0; i < q; i++){
+        candidates = index->query(queries[i].signatures, queries[i].size, threshold);
+        candidates.queryKey = queries[i].key;
+        results.push_back(candidates);
+    }
+    delete index->lshes;
+    delete[] index->partitions;
+    outputQueryResults(results, outputFilename);
+    std::cout << "Finished querying LSH Ensemble index, output " << outputFilename;
 }
 
 

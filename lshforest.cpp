@@ -16,29 +16,24 @@ Lshforest::Lshforest(int K, int L, int hashValueSize)
 }
 
 void Lshforest::add(std::string key, uint32_t *sig) {
-    // std::cout << "Lshforest::add initHashTables : " <<this->initHashTables.size() << "\n";
     std::string tmp;
-    std::cout<< sig[0] << std::endl;
-    std::cout << key << std::endl;
     for(int i = 0; i < this->l; i++){
         tmp = this->hashKeyFunc(sig, i, this->k);
-        std::cout << "tmp ===>"<< tmp << std::endl; ;
-        // this->initHashTables[i][tmp] = std::vector<std::string>();
         this->initHashTables[i][tmp].push_back(key);
-        std::cout << "tmp=" <<this->initHashTables[i][tmp].size()<< std::endl;
     }
 }
 
 void Lshforest::index(){
     hashTable ht;
+    auto p = this->initHashTables[1];
     for(int i =0; i < this->l; i++){
-        for (auto const& x : this->initHashTables[i]){
-            ht.push_back({hashKey : x.first, keys : x.second});
+        for (auto x : this->initHashTables[i]){
+            ht.push_back({x.first, x.second});
         }
         std::sort(ht.begin(), ht.end(), &bucketSorter);
         this->hashTables.push_back(ht);
-        this->initHashTables.clear();
     }
+    this->initHashTables.clear();
 }
 
 std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
@@ -76,9 +71,9 @@ std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
 }
 
 Param Lshforest::optimalKL(int x, int q, double t){
-    double minEr = __DBL_MAX__;
-    double currFp, currFn, currEr;
-    int optK, optL;
+    double minEr = double(1e6+5);
+    double currFp{}, currFn{}, currEr{};
+    int optK{}, optL{};
     for (int l = 1; l < this->l; l++)
     {
         for (int k = 1; k < this->k; k++)

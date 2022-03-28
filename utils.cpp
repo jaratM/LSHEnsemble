@@ -8,7 +8,7 @@ void outputQueryResults(std::vector<queryResult> const& results, std::string out
     }
     for(auto result : results){
         out << result.queryKey << "\t";
-        out << std::to_string(result.duration) << "\t";
+        out << std::to_string(result.duration) << "s\t";
         for(int i = 0; i < result.candidates.size(); i++){
             out << result.candidates[i];
             if(i < result.candidates.size() - 1)

@@ -1,6 +1,6 @@
 // #include "linearscan_benchmark_test.cpp"
 #include "lshensemble_benchmark_test.hpp"
-constexpr int subsets[] {50};
+constexpr int subsets[] {500};
 constexpr int subsetsLen {std::size(subsets)};
 constexpr double threshold {0.5};
 constexpr double fracQuery  {0.1};
@@ -11,13 +11,12 @@ int readDomains(std::vector<rawDomain> &rawDomains, std::string const& dir){
     int count = 0;
     for (const auto & entry : std::filesystem::directory_iterator(dir)){
         std::ifstream infile(entry.path());
-        std::string key = entry.path().u8string();
+        std::string key = entry.path().filename();
         std::string value;
         std::map<std::string, bool> values;
         while (std::getline(infile, value))
         {
             std::transform(value.begin(), value.end(), value.begin(), [](unsigned char c){ return std::tolower(c); });
-            // std::cout << value ;
             values[value] = true;
         }
         if(values.size() < minDomainSize) continue;
@@ -25,7 +24,6 @@ int readDomains(std::vector<rawDomain> &rawDomains, std::string const& dir){
         rawDomains.push_back({values, key});
     }
     return count;
-     
 }
 void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, double threshold, int subset){
     std::string linearscanOutput = "../output32/_cod_linearscan_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
@@ -40,7 +38,6 @@ void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, dou
 int main(int argc, char* argv[]) {
 
     std::vector<rawDomain> rawDomains;
-
     clock_t begin = clock();
     int numDomains;
     // Running this function requires a `_cod_domains` directory
@@ -70,8 +67,6 @@ int main(int argc, char* argv[]) {
             queries[j] = rawDomains_[rand() % subsets[i]];
         }
         // Run benchmark
-        std::cout << "key ---> " << rawDomains_[0].key << "\n";
-        std::cout << "start linear scan" << subsets[i] <<"\n";
         benchmarkCOD(rawDomains_, queries, subsets[i], numQuery, threshold, i);
     }
     

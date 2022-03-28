@@ -39,18 +39,12 @@ struct Key
     };
 };
 
-// class Lsh{
-//     public:
-//         void add(std::string, uint32_t *);
-//         void index();
-//         std::vector<std::string> query(uint32_t *, int, int);
-//         Param optimalKL(int, int, double);
-// };
 class Lshforest;
+class LshForestArray;
 struct LshEnsemble{
     public:
         Partition *partitions;
-        Lshforest *lshes;
+        std::vector<LshForestArray *> *lshes;
         int maxK;
         int numHash;
         std::map<Key, Param> cmap;
@@ -62,11 +56,13 @@ struct LshEnsemble{
         void computeParams(Param *,int, double);
 };
 
-LshEnsemble* NewLshEnsemble(Partition [], int, int);
+// LshEnsemble* NewLshEnsemble(Partition [], int, int);
 int bs(hashTable const&, int, std::string);
 bool bucketSorter(Bucket const&, Bucket const&);
 bool rawDomainSorter(rawDomain const&, rawDomain const&);
-// LshEnsemble NewLshEnsemblePlus(Partition *, int, int);
+LshEnsemble* NewLshEnsemblePlus(Partition *, int, int);
+LshForestArray* NewLshForestArray(int, int);
+
 
 
 #endif 

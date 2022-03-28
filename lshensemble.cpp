@@ -1,27 +1,26 @@
 #include "lshensemble.hpp"
-#include "lshforest.hpp"
+#include "lsharray.hpp"
 
-LshEnsemble* NewLshEnsemble(Partition *parts, int numHash, int maxK){
+// LshEnsemble* NewLshEnsemble(Partition *parts, int numHash, int maxK){
 
-    auto lshes = new std::vector<Lshforest>() ;
-	for(int i = 0; i < numPart; i++){ 
-		lshes->push_back({maxK, numHash/maxK, 4});
-	}
-	return new LshEnsemble{parts, lshes->data(), maxK, numHash};
-}
-
-// LshEnsemble NewLshEnsemblePlus(Partition *parts, int numHash, int maxK){
-//     Lsh lshes[numPart];
-//     for(int i = 0; i < numPart; i++){
-//             lshes[i] = NewLshForestArray(maxK, numHash);
-//         }
-//         return LshEnsemble{parts, lshes, maxK, numHash};
+//     auto lshes = new std::vector<Lshforest>() ;
+// 	for(int i = 0; i < numPart; i++){ 
+// 		lshes->push_back({maxK, numHash/maxK, 4});
+// 	}
+// 	return new LshEnsemble{parts, lshes->data(), maxK, numHash};
 // }
+
+LshEnsemble* NewLshEnsemblePlus(Partition *parts, int numHash, int maxK){
+    auto lshes = new std::vector<LshForestArray*>();
+    for(int i = 0; i < numPart; i++){ 
+            lshes->push_back(NewLshForestArray(maxK, numHash));
+        }
+        return new LshEnsemble{parts, lshes, maxK, numHash};
+}
 
 
 void LshEnsemble::add(std::string key, uint32_t *sig, int partInd){
-    std::cout << "LshEnsemble::add key:"<< sig[0] << "\n";
-    this->lshes[partInd].add(key, sig);
+    this->lshes->at(partInd)->add(key, sig);
 }
 
 void LshEnsemble::prepare(std::string key, uint32_t *sig, int size)  {
@@ -36,7 +35,7 @@ void LshEnsemble::prepare(std::string key, uint32_t *sig, int size)  {
 
 void LshEnsemble::index(){
     for(int i = 0; i < numPart; i++){
-        this->lshes[i].index();
+        this->lshes->at(i)->index();
     }
 }
 
@@ -55,7 +54,7 @@ queryResult LshEnsemble::query(uint32_t *sig, int size, double threshold){
 std::vector<std::string> LshEnsemble::queryWithParam(uint32_t *sig, Param *params){
     std::vector<std::string> results, tmp;
     for(int i = 0; i < numPart; i++){
-        tmp = this->lshes[i].query(sig, params[i].k, params[i].l);
+        tmp = this->lshes->at(i)->query(sig, params[i].k, params[i].l);
         results.insert(results.end(), tmp.begin(), tmp.end());
     }
     return results;
@@ -70,7 +69,7 @@ void LshEnsemble::computeParams(Param *params, int size, double threshold){
         if(this->cmap.count(key)){
             params[i] = this->cmap[key];
         }else{
-            optP = this->lshes[i].optimalKL(x, size, threshold);
+            optP = this->lshes->at(i)->optimalKL(x, size, threshold);
             this->cmap[key] = optP;
             params[i] = optP;
         }
