@@ -35,7 +35,7 @@ struct domainRecord
 {
     std::string key;
     int size;
-    uint32_t *signatures;
+    std::vector<uint32_t> signatures;
 
 };
 

@@ -4,8 +4,8 @@
 void minhashDomains(domainRecord *domainRecords, rawDomain *domains, int size, int numHash) {
     rp::MinHash mh(numHash, benchmarkSeed);
     for(int i = 0; i < size; i++){
-        auto sig = mh.minhash_universal(domains[i].values);
-        domainRecords[i].signatures = sig->data();
+        std::vector<uint32_t> sig = mh.minhash_universal(domains[i].values);
+        domainRecords[i].signatures = sig;
         domainRecords[i].size = domains[i].values.size();
         domainRecords[i].key = domains[i].key;
     }
@@ -40,7 +40,7 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     std::vector<queryResult> results;
     queryResult candidates;
     for(int i = 0; i < q; i++){
-        candidates = index->query(queries[i].signatures, queries[i].size, threshold);
+        candidates = index->query(queries[i].signatures.data(), queries[i].size, threshold);
         candidates.queryKey = queries[i].key;
         results.push_back(candidates);
     }

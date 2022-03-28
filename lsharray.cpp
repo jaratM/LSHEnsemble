@@ -3,13 +3,11 @@
 LshForestArray::LshForestArray(){}
 
 LshForestArray::LshForestArray(int maxk, int NumHash){
-    auto array = new std::vector<Lshforest>();
     for (int k = 1; k <= maxk; k++){
-		array->push_back({k, NumHash/k, 4});
+		this->array.push_back({k, NumHash/k, 4});
 	}
     this->maxk = maxk;
     this->numHash = NumHash;
-    this->array = array->data();
 }
 
 // LshForestArray* NewLshForestArray(int maxk, int numHash){

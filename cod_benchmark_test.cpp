@@ -29,8 +29,8 @@ void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, dou
     std::string linearscanOutput = "../output32/_cod_linearscan_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
 	std::string lshensembleOutput = "../output32/_cod_lshensemble_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
 	std::string accuracyOutput = "../output32/_cod_accuracy_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
-    benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
-	// benchmarkLshEnsemble(rawDomains, queries, n, q, threshold, lshensembleOutput);
+    // benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
+	benchmarkLshEnsemble(rawDomains, queries, n, q, threshold, lshensembleOutput);
 	// benchmarkAccuracy(linearscanOutput, lshensembleOutput, accuracy_outpuO;
 
 

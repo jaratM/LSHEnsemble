@@ -7,7 +7,7 @@ class LshForestArray
     public:
         int maxk;
         int numHash;
-        Lshforest *array;
+        std::vector<Lshforest> array;
         LshForestArray();
         LshForestArray(int maxk, int numhash);
         void add(std::string, uint32_t *sig);

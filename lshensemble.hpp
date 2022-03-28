@@ -44,7 +44,7 @@ class LshForestArray;
 struct LshEnsemble{
     public:
         Partition *partitions;
-        LshForestArray *lshes;
+        std::vector<LshForestArray> lshes;
         int maxK;
         int numHash;
         std::map<Key, Param> cmap;
