@@ -44,7 +44,7 @@ class LshForestArray;
 struct LshEnsemble{
     public:
         Partition *partitions;
-        std::vector<LshForestArray *> *lshes;
+        LshForestArray *lshes;
         int maxK;
         int numHash;
         std::map<Key, Param> cmap;
@@ -54,6 +54,7 @@ struct LshEnsemble{
         queryResult query(uint32_t *, int, double);
         std::vector<std::string> queryWithParam(uint32_t *, Param *);
         void computeParams(Param *,int, double);
+        ~LshEnsemble();
 };
 
 // LshEnsemble* NewLshEnsemble(Partition [], int, int);
@@ -61,7 +62,7 @@ int bs(hashTable const&, int, std::string);
 bool bucketSorter(Bucket const&, Bucket const&);
 bool rawDomainSorter(rawDomain const&, rawDomain const&);
 LshEnsemble* NewLshEnsemblePlus(Partition *, int, int);
-LshForestArray* NewLshForestArray(int, int);
+// LshForestArray* NewLshForestArray(int, int);
 
 
 

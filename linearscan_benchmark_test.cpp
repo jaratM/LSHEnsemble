@@ -1,6 +1,5 @@
 
-// #include "lshensemble.hpp"
-#include "utils.cpp"
+#include "linearscan_benchmark_test.hpp"
 
 double computeExactContainment(std::map<std::string, bool> const& query, std::map<std::string, bool> const& domain){
     if (query.size()== 0 || domain.size() == 0) {

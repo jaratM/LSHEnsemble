@@ -2,19 +2,23 @@
 
 LshForestArray::LshForestArray(){}
 
-LshForestArray::LshForestArray(int maxk, int numhash, Lshforest *array){
-    this->maxk = maxK;
-    this->numHash = numHash;
-    this->array = array;
+LshForestArray::LshForestArray(int maxk, int NumHash){
+    auto array = new std::vector<Lshforest>();
+    for (int k = 1; k <= maxk; k++){
+		array->push_back({k, NumHash/k, 4});
+	}
+    this->maxk = maxk;
+    this->numHash = NumHash;
+    this->array = array->data();
 }
 
-LshForestArray* NewLshForestArray(int maxk, int numHash){
-    auto array = new std::vector<Lshforest>();
-    for (int k = 1; k <= maxK; k++){
-		array->push_back({k, numHash/k, 4});
-	}
-    return new LshForestArray{maxK, numHash, array->data()};
-}
+// LshForestArray* NewLshForestArray(int maxk, int numHash){
+//     auto array = new std::vector<Lshforest>();
+//     for (int k = 1; k <= maxk; k++){
+// 		array->push_back({k, numHash/k, 4});
+// 	}
+//     return new LshForestArray{maxk, numHash, array->data()};
+// }
 
 void LshForestArray::add(std::string key, uint32_t *sig){
     for(int i = 0; i < this->maxk; i++){
@@ -30,7 +34,7 @@ void LshForestArray::index(){
 
 std::vector<std::string> LshForestArray::query(uint32_t *sig, int K, int L){
     std::vector<std::string> candidates;
-    candidates = (this->array)[K].query(sig, -1, L);
+    candidates = (this->array)[K-1].query(sig, -1, L);
     return candidates;
 }
 

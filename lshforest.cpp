@@ -25,8 +25,8 @@ void Lshforest::add(std::string key, uint32_t *sig) {
 
 void Lshforest::index(){
     hashTable ht;
-    auto p = this->initHashTables[1];
-    for(int i =0; i < this->l; i++){
+    // auto p = this->initHashTables[1];
+    for(int i = 0; i < this->l; i++){
         for (auto x : this->initHashTables[i]){
             ht.push_back({x.first, x.second});
         }
@@ -46,13 +46,13 @@ std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
         hs[i] = this->hashKeyFunc(sig, i, k);
     }
     std::map<std::string, bool> seens;
-    hashTable ht;
+    // hashTable ht;
     std::string hk;
     int p;
     std::vector<std::string> candidates;
     for (int i = 0; i < l; i++)
     {
-        ht = this->hashTables[i];
+        auto ht = this->hashTables[i];
         hk = hs[i];
         p = bs(ht, prefixSize, hk);
         if(p < ht.size() && ht[p].hashKey.substr(0, prefixSize) == hk){
