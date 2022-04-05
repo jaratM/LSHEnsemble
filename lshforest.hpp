@@ -13,7 +13,7 @@ class Lshforest
         HashKeyFunc hashKeyFunc;
         Lshforest();
         Lshforest(int k, int l, int hashValueSize);
-        // ~Lshforest();
+        ~Lshforest();
         void add(std::string, uint32_t *);
         void index();
         std::vector<std::string> query(uint32_t *, int, int);

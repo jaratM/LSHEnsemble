@@ -44,7 +44,7 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
         candidates.queryKey = queries[i].key;
         results.push_back(candidates);
     }
-    // delete index->lshes;
+    delete index;
     // delete[] index->partitions;
     outputQueryResults(results, outputFilename);
     std::cout << "Finished querying LSH Ensemble index, output " << outputFilename;

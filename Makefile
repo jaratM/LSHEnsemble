@@ -1,5 +1,7 @@
 CC= gcc -g
-CPP=g++ -g -fsanitize=address -Wall -Wextra -std=c++17 
+fast = -Ofast
+debug = -g -fsanitize=address
+CPP=g++ $(debug) -std=c++17
 
 all: cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp  utils.cpp ./LSH/minhash.cpp ./LSH/xxHash/xxhash.c probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp
 	$(CPP) -o cod_benchmark_test cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp  utils.cpp ./LSH/minhash.cpp ./LSH/xxHash/xxhash.c probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp

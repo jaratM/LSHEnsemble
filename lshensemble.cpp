@@ -19,7 +19,8 @@ LshEnsemble* NewLshEnsemblePlus(Partition *parts, int numHash, int maxk){
 }
 
 LshEnsemble::~LshEnsemble(){
-    
+    delete [] partitions;
+    std::vector<LshForestArray>().swap(lshes);
 }
 
 void LshEnsemble::add(std::string key, uint32_t *sig, int partInd){

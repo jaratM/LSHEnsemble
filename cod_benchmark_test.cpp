@@ -1,9 +1,9 @@
 #include "linearscan_benchmark_test.hpp"
 #include "lshensemble_benchmark_test.hpp"
-constexpr int subsets[] {500};
+constexpr int subsets[] {65537};
 constexpr int subsetsLen {std::size(subsets)};
 constexpr double threshold {0.5};
-constexpr double fracQuery  {0.1};
+constexpr double fracQuery  {0.01};
 constexpr int minDomainSize {10};
 
 
@@ -29,7 +29,7 @@ void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, dou
     std::string linearscanOutput = "../output32/_cod_linearscan_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
 	std::string lshensembleOutput = "../output32/_cod_lshensemble_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
 	std::string accuracyOutput = "../output32/_cod_accuracy_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
-    // benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
+    benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
 	benchmarkLshEnsemble(rawDomains, queries, n, q, threshold, lshensembleOutput);
 	// benchmarkAccuracy(linearscanOutput, lshensembleOutput, accuracy_outpuO;
 
@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
     // in the current directory.
     // The `_code_domains` directory should contain domains files,
     // which are line-separated files.
-    numDomains = readDomains(rawDomains, "../doc_files");
+    numDomains = readDomains(rawDomains, argv[1]);
 
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;

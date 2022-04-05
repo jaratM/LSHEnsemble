@@ -1,5 +1,9 @@
 #include "lsharray.hpp"
 
+LshForestArray::~LshForestArray(){
+    std::vector<Lshforest>().swap(array);
+}
+
 LshForestArray::LshForestArray(){}
 
 LshForestArray::LshForestArray(int maxk, int NumHash){

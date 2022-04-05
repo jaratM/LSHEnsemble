@@ -21,13 +21,11 @@ void benchmarkLinearscan(rawDomain const *raw_domains, rawDomain const *queries,
     double threshold, std::string linearscan_output){
         std::vector<queryResult> results;
         double c;
-        std::cout << raw_domains[2].key << "   " << q << " ---- " <<n <<"\n";
         for(int query = 0; query < q; query++){
             clock_t begin = clock();
             std::vector<std::string> r;
             for(int domain = 0; domain < n; domain++){
                 c = computeExactContainment(queries[query].values, raw_domains[domain].values);
-                std::cout << c << "\n";
                 if(c < threshold) continue;
                 r.push_back(raw_domains[domain].key);
             }

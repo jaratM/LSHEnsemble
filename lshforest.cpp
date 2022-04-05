@@ -2,7 +2,11 @@
 
 Lshforest::Lshforest(){
 }
-
+Lshforest::~Lshforest()
+{
+    std::vector<initHashTable>().swap(initHashTables);
+    std::vector<hashTable>().swap(hashTables);
+}
 Lshforest::Lshforest(int K, int L, int hashValueSize)
 {
     if(K < 0 || L <0){

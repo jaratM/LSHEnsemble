@@ -38,6 +38,10 @@ struct domainRecord
     std::vector<uint32_t> signatures;
 
 };
+struct P_r{
+    double p;
+    double r;
+};
 
 void outputQueryResults(std::vector<queryResult> const& results, std::string output_file_name);
 // void outputDomainRecords(domainRecord *records, int size, std::string output_file_name);
