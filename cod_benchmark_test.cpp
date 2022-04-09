@@ -29,7 +29,7 @@ void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, dou
     std::string linearscanOutput = "../output32/_cod_linearscan_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
 	std::string lshensembleOutput = "../output32/_cod_lshensemble_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
 	std::string accuracyOutput = "../output32/_cod_accuracy_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
-    benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
+    // benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
 	benchmarkLshEnsemble(rawDomains, queries, n, q, threshold, lshensembleOutput);
 	// benchmarkAccuracy(linearscanOutput, lshensembleOutput, accuracy_outpuO;
 
@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
     // in the current directory.
     // The `_code_domains` directory should contain domains files,
     // which are line-separated files.
-    numDomains = readDomains(rawDomains, argv[1]);
+    numDomains = readDomains(rawDomains, "../_cod_domains");
 
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
@@ -54,21 +54,19 @@ int main(int argc, char* argv[]) {
     // sort domains 
     std::sort(rawDomains.begin(), rawDomains.end(), &rawDomainSorter);
 
-    for(int i = 0; i < subsetsLen; i++){
-        std::cout << "subset : " << i << "\n"; 
-        int numQuery {int(fracQuery * double(subsets[i]))};
-        std::cout << "size of queries" << numQuery <<"\n";
-        rawDomain rawDomains_[subsets[i]];
-        for (int k = 0; k < subsets[i]; k++) {
-            rawDomains_[k] = rawDomains[k];
-        }
-        rawDomain queries[subsets[i]];
-        srand (benchmarkSeed);
-        for(int j = 0; j < numQuery; j++){
-            queries[j] = rawDomains_[rand() % subsets[i]];
-        }
-        // Run benchmark
-        benchmarkCOD(rawDomains_, queries, subsets[i], numQuery, threshold, i);
+    int numQuery {int(fracQuery * double(numDomains))};
+    std::cout << "size of queries" << numQuery <<"\n";
+    // rawDomain rawDomains_[subsets[i]];
+    // for (int k = 0; k < subsets[i]; k++) {
+    //     rawDomains_[k] = rawDomains[k];
+    // }
+    rawDomain queries[numQuery];
+    srand (benchmarkSeed);
+    for(int j = 0; j < numQuery; j++){
+        queries[j] = rawDomains[rand() % numDomains];
     }
+    // Run benchmark
+    std::cout << "start benchmark \n";
+    benchmarkCOD(rawDomains.data(), queries, numDomains, numQuery, threshold, 1);
     
 }
