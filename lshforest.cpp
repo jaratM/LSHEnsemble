@@ -17,6 +17,7 @@ Lshforest::Lshforest(int K, int L, int hashValueSize)
     this->hashValueSize = hashValueSize;
     this->hashKeyFunc = hashKeyFuncGen(hashValueSize);
     this->initHashTables.resize(L);
+    this->hashTables.resize(L);
 }
 
 void Lshforest::add(std::string key, uint32_t *sig) {
@@ -28,16 +29,17 @@ void Lshforest::add(std::string key, uint32_t *sig) {
 }
 
 void Lshforest::index(){
-    hashTable ht;
+    
     // auto p = this->initHashTables[1];
     for(int i = 0; i < this->l; i++){
+        hashTable ht;
         for (auto x : this->initHashTables[i]){
             ht.push_back({x.first, x.second});
         }
         std::sort(ht.begin(), ht.end(), &bucketSorter);
-        this->hashTables.push_back(ht);
+        this->hashTables[i] = ht;
     }
-    this->initHashTables.clear();
+    std::vector<initHashTable>().swap(initHashTables);
 }
 
 std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){

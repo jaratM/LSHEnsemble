@@ -11,11 +11,11 @@
 // }
 
 LshEnsemble* NewLshEnsemblePlus(Partition *parts, int numHash, int maxk){
-    std::vector<LshForestArray> lshes;
+    auto index = new LshEnsemble{parts, std::vector<LshForestArray>(numPart), maxk, numHash};
     for(int i = 0; i < numPart; i++){ 
-            lshes.push_back({maxk, numHash});
+            (index->lshes)[i] = {maxk, numHash};
         }
-    return new LshEnsemble{parts, lshes, maxk, numHash};
+    return index;
 }
 
 LshEnsemble::~LshEnsemble(){

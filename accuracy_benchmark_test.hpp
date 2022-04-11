@@ -9,6 +9,6 @@ P_r recallPrecision(queryResult, queryResult);
 
 std::vector<queryResult> readQueryResultFile(std::string);
 
-double mean(double []);
+double mean(double [], int);
 
 #endif

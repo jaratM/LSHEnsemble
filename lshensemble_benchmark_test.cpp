@@ -18,7 +18,7 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     clock_t begin = clock();
     
     minhashDomains(domainRecords, rawDomains, n, numHash);
-
+    
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     std::cout << "Minhash domains in " << elapsed_secs << "\n";
@@ -37,6 +37,7 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     std::cout << "Finished building LSH Ensemble index \n";
     std::cout << "Start querying LSH Ensemble index with "<< q << " queries.\n";
 
+    begin = clock();
     std::vector<queryResult> results;
     queryResult candidates;
     for(int i = 0; i < q; i++){
@@ -45,6 +46,8 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
         results.push_back(candidates);
     }
     delete index;
+    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    std::cout << "Finished LSH querying  in " << elapsed_secs << "\n";
     // delete[] index->partitions;
     outputQueryResults(results, outputFilename);
     std::cout << "Finished querying LSH Ensemble index, output " << outputFilename;

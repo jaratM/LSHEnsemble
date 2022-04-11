@@ -1,7 +1,8 @@
 #include "linearscan_benchmark_test.hpp"
 #include "lshensemble_benchmark_test.hpp"
-constexpr int subsets[] {65537};
-constexpr int subsetsLen {std::size(subsets)};
+#include "accuracy_benchmark_test.hpp"
+// constexpr int subsets[] {65537};
+// constexpr int subsetsLen {std::size(subsets)};
 constexpr double threshold {0.5};
 constexpr double fracQuery  {0.01};
 constexpr int minDomainSize {10};
@@ -26,12 +27,12 @@ int readDomains(std::vector<rawDomain> &rawDomains, std::string const& dir){
     return count;
 }
 void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, double threshold, int subset){
-    std::string linearscanOutput = "../output32/_cod_linearscan_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
-	std::string lshensembleOutput = "../output32/_cod_lshensemble_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
-	std::string accuracyOutput = "../output32/_cod_accuracy_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(subset+1);
+    std::string linearscanOutput = "../output32/_cod_linearscan_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(65537);
+	std::string lshensembleOutput = "../output32/_cod_lshensemble_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(65537);
+	std::string accuracyOutput = "../output32/_cod_accuracy_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(65537);
     // benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
-	benchmarkLshEnsemble(rawDomains, queries, n, q, threshold, lshensembleOutput);
-	// benchmarkAccuracy(linearscanOutput, lshensembleOutput, accuracy_outpuO;
+	// benchmarkLshEnsemble(rawDomains, queries, n, q, threshold, lshensembleOutput);
+	benchmarkAccuracy(linearscanOutput, lshensembleOutput, accuracyOutput);
 
 
 }
@@ -45,7 +46,7 @@ int main(int argc, char* argv[]) {
     // in the current directory.
     // The `_code_domains` directory should contain domains files,
     // which are line-separated files.
-    numDomains = readDomains(rawDomains, "../_cod_domains");
+    numDomains = readDomains(rawDomains, "../doc_files");
 
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;

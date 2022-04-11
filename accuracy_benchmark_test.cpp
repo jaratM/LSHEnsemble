@@ -62,15 +62,23 @@ P_r recallPrecision(queryResult result, queryResult groundTruth){
 std::vector<queryResult> readQueryResultFile(std::string queryResultFile){
 	std::vector<queryResult> results;
 	std::ifstream infile(queryResultFile);
-	std::string line;
-	std::vector<std::string> tokens;
-	while (std::getline(infile, line)){
-		std::istringstream iss(line);
+	std::string raw;
+	while (std::getline(infile, raw)){
+		std::vector<std::string> tokens;
+		std::istringstream iss(raw);
 		std::string token;
+		
 		while(std::getline(iss, token, '\t')) 
 			tokens.push_back(token);
 		
+		std::vector<std::string> candidates(tokens.size()-2);
+		for(int i = 2; i < tokens.size(); i++){
+			candidates[i-2] = tokens[i];
+		}
+		std::string duration{tokens[1].substr(0, tokens[1].size()-1)};
+		results.push_back({candidates, tokens[0], stod(duration)});
 	}
+	return results;
 }
 double mean(double *a, int size){
 	double sum = 0;
