@@ -15,7 +15,7 @@ double computeExactContainment(std::map<std::string, bool> const& query, std::ma
     }
 	
 	
-    return double(intersection / query.size());
+    return double(intersection) / double(query.size());
 }
 void benchmarkLinearscan(rawDomain const *raw_domains, rawDomain const *queries, int n, int q,
     double threshold, std::string linearscan_output){
