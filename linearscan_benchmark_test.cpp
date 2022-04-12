@@ -19,8 +19,6 @@ double computeExactContainment(std::map<std::string, bool> const& query, std::ma
 }
 void benchmarkLinearscan(rawDomain const *raw_domains, rawDomain const *queries, int n, int q,
     double threshold, std::string linearscan_output){
-        std::cout << "start linear scan \n";
-        clock_t begin1 = clock();
         std::vector<queryResult> results;
         double c;
         for(int query = 0; query < q; query++){
@@ -35,9 +33,6 @@ void benchmarkLinearscan(rawDomain const *raw_domains, rawDomain const *queries,
             double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
             results.push_back({r, queries[query].key, elapsed_secs});
         }
-        clock_t end1 = clock();
-        double elapsed_secs = double(end1 - begin1) / CLOCKS_PER_SEC;
-        std::cout << "finished linear scan in " << elapsed_secs << "\n";
         outputQueryResults(results, linearscan_output);
     }
 
