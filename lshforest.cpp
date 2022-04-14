@@ -72,7 +72,7 @@ std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
 }
 
 Param Lshforest::optimalKL(int x, int q, double t){
-    double minEr = double(1e6+5);
+    double minEr = boost::math::tools::max_value<double>();
     double currFp{}, currFn{}, currEr{};
     int optK{}, optL{};
     for (int l = 1; l < this->l; l++)

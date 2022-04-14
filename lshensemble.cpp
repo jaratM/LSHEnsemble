@@ -69,7 +69,7 @@ void LshEnsemble::computeParams(Param *params, int size, double threshold){
     int x;
     for(int i = 0; i < numPart; i++){
         x = this->partitions[i].upper;
-        Key key{x, size, threshold};
+        std::string key = cashKey(x, size, threshold);
         if(this->cmap.count(key)){
             params[i] = this->cmap[key];
         }else{
@@ -128,4 +128,8 @@ bool rawDomainSorter(rawDomain const& domain, rawDomain const& domain1){
 
 bool domainRecordSorter(domainRecord const& record1, domainRecord const& record2){
     return record1.size < record2.size;
+}
+
+std::string cashKey(int x, int q, double t){
+    return boost::str(boost::format("%d %d %.2f") % x % q % t);
 }

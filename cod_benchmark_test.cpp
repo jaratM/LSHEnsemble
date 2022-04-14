@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
     // in the current directory.
     // The `_code_domains` directory should contain domains files,
     // which are line-separated files.
-    numDomains = readDomains(rawDomains, "../doc_files");
+    numDomains = readDomains(rawDomains, "../_cod_domains");
 
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;

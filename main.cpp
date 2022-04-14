@@ -7,55 +7,56 @@
 #include <filesystem>
 #include <stdlib.h>     /* srand, rand */
 #include <functional>
+#include <boost/format.hpp>
 
-namespace fs = std::filesystem;
-struct raw_domain
-{
-    std::map<std::string, bool> values;
-    std::string key;
-};
-bool raw_domain_sorter(raw_domain const& domain, raw_domain const& domain1){
-    return domain.values.size() < domain1.values.size();
-}
-using hashKeyFunc = std::function<std::string(u_int32_t)> ;
+// namespace fs = std::filesystem;
+// struct raw_domain
+// {
+//     std::map<std::string, bool> values;
+//     std::string key;
+// };
+// bool raw_domain_sorter(raw_domain const& domain, raw_domain const& domain1){
+//     return domain.values.size() < domain1.values.size();
+// }
+// using hashKeyFunc = std::function<std::string(u_int32_t)> ;
 
-hashKeyFunc hashKeyFuncGen(int hashValueSize){
+// hashKeyFunc hashKeyFuncGen(int hashValueSize){
 
-    return  [hashValueSize](u_int32_t) mutable
-    {
-        return "ss";
-    };
-}
-using byte = unsigned char;
+//     return  [hashValueSize](u_int32_t) mutable
+//     {
+//         return "ss";
+//     };
+// }
+// using byte = unsigned char;
 
-void littleEndian(byte b[], uint32_t v){
-    b[0] = byte(v);
-	b[1] = byte(v >> 8);
-	b[2] = byte(v >> 16);
-	b[3] = byte(v >> 24);
-}
+// void littleEndian(byte b[], uint32_t v){
+//     b[0] = byte(v);
+// 	b[1] = byte(v >> 8);
+// 	b[2] = byte(v >> 16);
+// 	b[3] = byte(v >> 24);
+// }
 
 
 
-int  bs(std::vector<std::string> const& v, std::string q){
+// int  bs(std::vector<std::string> const& v, std::string q){
 
-	// Define f(-1) == false and f(n) == true.
-	// Invariant: f(i-1) == false, f(j) == true.
-	int i = 0, j = v.size();
-    int h;
-	while(i < j){
-		h = int(i+j >> 1); // avoid overflow when computing h
-		// i ≤ h < j
+// 	// Define f(-1) == false and f(n) == true.
+// 	// Invariant: f(i-1) == false, f(j) == true.
+// 	int i = 0, j = v.size();
+//     int h;
+// 	while(i < j){
+// 		h = int(i+j >> 1); // avoid overflow when computing h
+// 		// i ≤ h < j
         
-		if(!(v[h] >= q)) {
-			i = h + 1;// preserves f(i-1) == false
-		} else {
-			j = h;// preserves f(j) == true
-		}
-	}
-	// i == j, f(i-1) == false, and f(j) (= f(i)) == true  =>  answer is i.
-	return i;
-}
+// 		if(!(v[h] >= q)) {
+// 			i = h + 1;// preserves f(i-1) == false
+// 		} else {
+// 			j = h;// preserves f(j) == true
+// 		}
+// 	}
+// 	// i == j, f(i-1) == false, and f(j) (= f(i)) == true  =>  answer is i.
+// 	return i;
+// }
 
 
 int main(int argc, char* argv[]) {
@@ -113,9 +114,11 @@ int main(int argc, char* argv[]) {
     // m["hello"] = std::vector<std::string>;
     // m["hello"].push_back("test");
     // std::cout << m["hello"][0] <<"\n";
-    std::vector<std::map<std::string, std::vector<std::string>>> m; 
+    // std::vector<std::map<std::string, std::vector<std::string>>> m; 
 
-    m.resize(5);
-    m[0]["helo"].push_back("kkk");
-    std::cout << "------------------->" << m.size();
+    // m.resize(5);
+    // m[0]["helo"].push_back("kkk");
+    // std::cout << "------------------->" << m.size();
+    int x{1213}, size{46546};
+    double  threshold{3.65656};
 }

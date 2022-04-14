@@ -4,8 +4,7 @@
 void minhashDomains(domainRecord *domainRecords, rawDomain *domains, int size) {
     rp::MinHash mh(numHash, benchmarkSeed);
     for(int i = 0; i < size; i++){
-        std::vector<uint32_t> sig = mh.minhash_universal(domains[i].values);
-        domainRecords[i].signatures = sig;
+        domainRecords[i].signatures = mh.minhash_universal(domains[i].values);
         domainRecords[i].size = domains[i].values.size();
         domainRecords[i].key = domains[i].key;
     }

@@ -29,16 +29,6 @@ struct Bucket {
 };
 typedef std::vector<Bucket> hashTable;
 
-struct Key
-{
-    int x;
-    int size;
-    double threshold;
-    bool operator<(const Key& a) const{
-        return (a.size == size && a.x == x && threshold < a.threshold);
-    };
-};
-
 class Lshforest;
 class LshForestArray;
 struct LshEnsemble{
@@ -47,7 +37,7 @@ struct LshEnsemble{
         std::vector<LshForestArray> lshes;
         int maxK;
         int numHash;
-        std::map<Key, Param> cmap;
+        std::map<std::string, Param> cmap;
         void add(std::string, uint32_t *, int);
         void prepare(std::string, uint32_t *, int);
         void index();
@@ -63,6 +53,7 @@ int binarySearch(hashTable const&, int, std::string const &);
 bool bucketSorter(Bucket const&, Bucket const&);
 bool rawDomainSorter(rawDomain const&, rawDomain const&);
 LshEnsemble* NewLshEnsemblePlus(Partition *, int, int);
+std::string cashKey(int x, int q, double t);
 // LshForestArray* NewLshForestArray(int, int);
 
 
