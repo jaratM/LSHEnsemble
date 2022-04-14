@@ -27,17 +27,16 @@ void Lshforest::add(std::string key, uint32_t *sig) {
     }
 }
 
-void Lshforest::index(){
-    hashTable ht;
-    // auto p = this->initHashTables[1];
+void Lshforest::index(){ 
     for(int i = 0; i < this->l; i++){
+        hashTable ht;
         for (auto x : this->initHashTables[i]){
             ht.push_back({x.first, x.second});
         }
         std::sort(ht.begin(), ht.end(), &bucketSorter);
         this->hashTables.push_back(ht);
     }
-    this->initHashTables.clear();
+    std::vector<initHashTable>().swap(initHashTables);
 }
 
 std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
@@ -50,7 +49,6 @@ std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
         hs[i] = this->hashKeyFunc(sig, i, k);
     }
     std::map<std::string, bool> seens;
-    // hashTable ht;
     std::string hk;
     int p;
     std::vector<std::string> candidates;
@@ -58,7 +56,7 @@ std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
     {
         auto ht = this->hashTables[i];
         hk = hs[i];
-        p = bs(ht, prefixSize, hk);
+        p = binarySearch(ht, prefixSize, hk);
         if(p < ht.size() && ht[p].hashKey.substr(0, prefixSize) == hk){
             for (int j = p; j < ht.size() && ht[j].hashKey.substr(0,prefixSize) == hk; j++) {
                 for(auto key : ht[j].keys){
@@ -69,7 +67,6 @@ std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
             }
         }
     }
-    seens.clear();
     return candidates;
     
 }

@@ -22,7 +22,7 @@ void benchmarkAccuracy(std::string groundTruthFilename, std::string queryResultF
     }
     out << "Query" << ", Precision" << ", Recall\n";
     for(int i = 0; i < q; i++){
-        out<< queryResults[i].queryKey <<", " << precisions[i] << ", " << recalls[i] << "\n";
+        out<< queryResults[i].queryKey <<",\t" << precisions[i] << ",\t" << recalls[i] << "\n";
     }
     out.close();
 }

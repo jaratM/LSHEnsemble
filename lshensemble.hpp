@@ -58,7 +58,8 @@ struct LshEnsemble{
 };
 
 // LshEnsemble* NewLshEnsemble(Partition [], int, int);
-int bs(hashTable const&, int, std::string);
+bool domainRecordSorter(domainRecord const&, domainRecord const&);
+int binarySearch(hashTable const&, int, std::string const &);
 bool bucketSorter(Bucket const&, Bucket const&);
 bool rawDomainSorter(rawDomain const&, rawDomain const&);
 LshEnsemble* NewLshEnsemblePlus(Partition *, int, int);

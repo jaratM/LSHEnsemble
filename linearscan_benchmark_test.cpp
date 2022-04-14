@@ -7,7 +7,7 @@ double computeExactContainment(std::map<std::string, bool> const& query, std::ma
 	}
 	std::map<std::string, bool> smaller, bigger;
 	smaller = (query.size() < domain.size()) ? query : domain;
-    bigger = (query.size() > domain.size()) ? query : domain;
+    bigger = (query.size() >= domain.size()) ? query : domain;
     int intersection = 0;
     for (auto const& x : smaller)
     {

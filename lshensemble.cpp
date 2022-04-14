@@ -103,7 +103,7 @@ HashKeyFunc hashKeyFuncGen(int hashValueSize){
     };
 }
 
-int  bs(hashTable const& v, int prefix, std::string q){
+int  binarySearch(hashTable const& v, int prefix, std::string const& q){
 
 	int i = 0, j = v.size();
     int h;
@@ -124,4 +124,8 @@ bool bucketSorter(Bucket const& domain, Bucket const& domain1){
 
 bool rawDomainSorter(rawDomain const& domain, rawDomain const& domain1){
     return domain.values.size() < domain1.values.size();
+}
+
+bool domainRecordSorter(domainRecord const& record1, domainRecord const& record2){
+    return record1.size < record2.size;
 }
