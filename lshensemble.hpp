@@ -3,7 +3,7 @@
 
 #include "utils.hpp"
 
-using HashKeyFunc = std::function<std::string(u_int32_t *, int, int)> ;
+using HashKeyFunc = std::function<std::string(uint64_t *, int, int)> ;
 using Keys =  std::vector<std::string> ;
 using initHashTable = std::map<std::string, Keys> ;
 HashKeyFunc hashKeyFuncGen(int);
@@ -38,11 +38,11 @@ struct LshEnsemble{
         int maxK;
         int numHash;
         std::map<std::string, Param> cmap;
-        void add(std::string, uint32_t *, int);
-        void prepare(std::string, uint32_t *, int);
+        void add(std::string, uint64_t *, int);
+        void prepare(std::string, uint64_t *, int);
         void index();
-        queryResult query(uint32_t *, int, double);
-        std::vector<std::string> queryWithParam(uint32_t *, Param *);
+        queryResult query(uint64_t *, int, double);
+        std::vector<std::string> queryWithParam(uint64_t *, Param *);
         void computeParams(Param *,int, double);
         ~LshEnsemble();
 };

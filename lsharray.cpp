@@ -6,12 +6,12 @@ LshForestArray::~LshForestArray(){
 
 LshForestArray::LshForestArray(){}
 
-LshForestArray::LshForestArray(int maxk, int NumHash){
+LshForestArray::LshForestArray(int maxk, int numHash){
     for (int k = 1; k <= maxk; k++){
-		this->array.push_back({k, NumHash/k, 4});
+		this->array.push_back({k, numHash/k, 4});
 	}
     this->maxk = maxk;
-    this->numHash = NumHash;
+    this->numHash = numHash;
 }
 
 // LshForestArray* NewLshForestArray(int maxk, int numHash){
@@ -22,7 +22,7 @@ LshForestArray::LshForestArray(int maxk, int NumHash){
 //     return new LshForestArray{maxk, numHash, array->data()};
 // }
 
-void LshForestArray::add(std::string key, uint32_t *sig){
+void LshForestArray::add(std::string key, uint64_t *sig){
     for(int i = 0; i < this->maxk; i++){
         (this->array)[i].add(key, sig);
     }
@@ -34,16 +34,14 @@ void LshForestArray::index(){
     }
 }
 
-std::vector<std::string> LshForestArray::query(uint32_t *sig, int K, int L){
-    std::vector<std::string> candidates;
-    candidates = (this->array)[K-1].query(sig, -1, L);
-    return candidates;
+std::vector<std::string> LshForestArray::query(uint64_t *sig, int K, int L){
+    return (this->array)[K-1].query(sig, -1, L);
 }
 
 Param LshForestArray::optimalKL(int x, int q, double t){
-    double minEr = double(1e6+5);
-    double currFp{}, currFn{}, currEr{};
-    int optK{}, optL{};
+    double minEr = boost::math::tools::max_value<double>();
+    double currFp{0}, currFn{0}, currEr{0};
+    int optK{0}, optL{0};
     for (int l = 1; l < this->numHash; l++)
     {
         for (int k = 1; k < this->maxk; k++)

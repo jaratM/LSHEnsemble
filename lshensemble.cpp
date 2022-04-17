@@ -4,7 +4,7 @@
 // LshEnsemble* NewLshEnsemble(Partition *parts, int numHash, int maxK){
 
 //     auto lshes = new std::vector<Lshforest>() ;
-// 	for(int i = 0; i < numPart; i++){ 
+// 	for(int i = 0; i < NumPart; i++){ 
 // 		lshes->push_back({maxK, numHash/maxK, 4});
 // 	}
 // 	return new LshEnsemble{parts, lshes->data(), maxK, numHash};
@@ -12,7 +12,7 @@
 
 LshEnsemble* NewLshEnsemblePlus(Partition *parts, int numHash, int maxk){
     std::vector<LshForestArray> lshes;
-    for(int i = 0; i < numPart; i++){ 
+    for(int i = 0; i < NumPart; i++){ 
             lshes.push_back({maxk, numHash});
         }
     return new LshEnsemble{parts, lshes, maxk, numHash};
@@ -23,12 +23,12 @@ LshEnsemble::~LshEnsemble(){
     std::vector<LshForestArray>().swap(lshes);
 }
 
-void LshEnsemble::add(std::string key, uint32_t *sig, int partInd){
+void LshEnsemble::add(std::string key, uint64_t *sig, int partInd){
     this->lshes[partInd].add(key, sig);
 }
 
-void LshEnsemble::prepare(std::string key, uint32_t *sig, int size)  {
-	for(int i = 0; i < numPart; i++){
+void LshEnsemble::prepare(std::string key, uint64_t *sig, int size)  {
+	for(int i = 0; i < NumPart; i++){
 		if (size >= this->partitions[i].lower && size <= this->partitions[i].upper) {
 			this->add(key, sig, i);
 			break;
@@ -38,13 +38,13 @@ void LshEnsemble::prepare(std::string key, uint32_t *sig, int size)  {
 }
 
 void LshEnsemble::index(){
-    for(int i = 0; i < numPart; i++){
+    for(int i = 0; i < NumPart; i++){
         this->lshes[i].index();
     }
 }
 
-queryResult LshEnsemble::query(uint32_t *sig, int size, double threshold){
-    Param params[numPart];
+queryResult LshEnsemble::query(uint64_t *sig, int size, double threshold){
+    Param params[NumPart];
     this->computeParams(params, size, threshold);
     clock_t begin = clock();
     std::vector<std::string> candidates;
@@ -55,9 +55,9 @@ queryResult LshEnsemble::query(uint32_t *sig, int size, double threshold){
     return results;
 }
 
-std::vector<std::string> LshEnsemble::queryWithParam(uint32_t *sig, Param *params){
+std::vector<std::string> LshEnsemble::queryWithParam(uint64_t *sig, Param *params){
     std::vector<std::string> results, tmp;
-    for(int i = 0; i < numPart; i++){
+    for(int i = 0; i < NumPart; i++){
         tmp = this->lshes[i].query(sig, params[i].k, params[i].l);
         results.insert(results.end(), tmp.begin(), tmp.end());
     }
@@ -67,7 +67,7 @@ std::vector<std::string> LshEnsemble::queryWithParam(uint32_t *sig, Param *param
 void LshEnsemble::computeParams(Param *params, int size, double threshold){
     Param optP;
     int x;
-    for(int i = 0; i < numPart; i++){
+    for(int i = 0; i < NumPart; i++){
         x = this->partitions[i].upper;
         std::string key = cashKey(x, size, threshold);
         if(this->cmap.count(key)){
@@ -80,7 +80,7 @@ void LshEnsemble::computeParams(Param *params, int size, double threshold){
     }
 }
 
-void littleEndian(byte *b, uint32_t v){
+void littleEndian(byte *b, uint64_t v){
     b[0] = byte(v);
 	b[1] = byte(v >> 8);
 	b[2] = byte(v >> 16);
@@ -89,9 +89,9 @@ void littleEndian(byte *b, uint32_t v){
 
 HashKeyFunc hashKeyFuncGen(int hashValueSize){
 
-    return  [hashValueSize](uint32_t *sig, int index, int k) mutable
+    return  [hashValueSize](uint64_t *sig, int index, int k) mutable
     {
-        byte s[numHash*hashValueSize];
+        byte s[NumHash*hashValueSize];
         byte buf[hashValueSize];
         for(int i = index*k; i < (index+1)*k; i++){
             littleEndian(buf, sig[i]);

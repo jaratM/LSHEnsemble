@@ -8,8 +8,8 @@ LshEnsemble* BootstrapLshEnsembleEquiDepth(int numPart, int numHash, int maxK, i
 }
 
 void bootstrapEquiDepth(LshEnsemble *index, int totalNumDomains, domainRecord *sortedDomains){
-    int depth = totalNumDomains / numPart;
-    int currDepth{}, currPart{}, currSize{};
+    int depth = totalNumDomains / NumPart;
+    int currDepth{0}, currPart{0}, currSize{0};
     
     for (int i = 0; i < totalNumDomains; i++)
     {
@@ -18,8 +18,8 @@ void bootstrapEquiDepth(LshEnsemble *index, int totalNumDomains, domainRecord *s
         currSize = sortedDomains[i].size;
 		index->add(sortedDomains[i].key, sortedDomains[i].signatures.data(), currPart);
 		currDepth++;
-		index->partitions[currPart] = {0,currSize};
-		if( currDepth >= depth && currPart < numPart-1) {
+		index->partitions[currPart].upper = currSize;
+		if( currDepth >= depth && currPart < NumPart-1) {
 			currPart++;
 			index->partitions[currPart].lower = currSize;
 			currDepth = 0;

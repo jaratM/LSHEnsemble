@@ -19,7 +19,7 @@ Lshforest::Lshforest(int K, int L, int hashValueSize)
     this->initHashTables.resize(L);
 }
 
-void Lshforest::add(std::string key, uint32_t *sig) {
+void Lshforest::add(std::string key, uint64_t *sig) {
     std::string tmp;
     for(int i = 0; i < this->l; i++){
         tmp = this->hashKeyFunc(sig, i, this->k);
@@ -39,7 +39,7 @@ void Lshforest::index(){
     std::vector<initHashTable>().swap(initHashTables);
 }
 
-std::vector<std::string> Lshforest::query(uint32_t *sig, int k, int l){
+std::vector<std::string> Lshforest::query(uint64_t *sig, int k, int l){
     if(k == -1) k = this->k;
     if(l == -1) l = this->l;
     int prefixSize = this->hashValueSize * k;

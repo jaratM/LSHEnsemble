@@ -2,11 +2,9 @@
 #include "lshensemble_benchmark_test.hpp"
 
 void minhashDomains(domainRecord *domainRecords, rawDomain *domains, int size) {
-    rp::MinHash mh(numHash, benchmarkSeed);
+    rp::MinHash mh(NumHash, benchmarkSeed);
     for(int i = 0; i < size; i++){
-        domainRecords[i].signatures = mh.minhash_universal(domains[i].values);
-        domainRecords[i].size = domains[i].values.size();
-        domainRecords[i].key = domains[i].key;
+        domainRecords[i] = (domainRecord){domains[i].key, domains[i].values.size(), mh.minhash_universal(domains[i].values)};
     }
 }
 
@@ -36,7 +34,7 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     std::sort(domainRecords, domainRecords + n, &domainRecordSorter);
 
     std::cout << "Start building LSH Ensemble index \n";
-    LshEnsemble *index = BootstrapLshEnsembleEquiDepth(numPart, numHash, maxK, n, domainRecords);
+    LshEnsemble *index = BootstrapLshEnsembleEquiDepth(NumPart, NumHash, MaxK, n, domainRecords);
     std::cout << "Finished building LSH Ensemble index \n";
     std::cout << "Start querying LSH Ensemble index with "<< q << " queries.\n";
 

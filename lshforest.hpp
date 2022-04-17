@@ -14,9 +14,9 @@ class Lshforest
         Lshforest();
         Lshforest(int k, int l, int hashValueSize);
         ~Lshforest();
-        void add(std::string, uint32_t *);
+        void add(std::string, uint64_t *);
         void index();
-        std::vector<std::string> query(uint32_t *, int, int);
+        std::vector<std::string> query(uint64_t *, int, int);
         Param optimalKL(int, int, double);
 };
 #endif

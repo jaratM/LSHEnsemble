@@ -17,9 +17,9 @@
 
 
 
-constexpr int numHash {256};
-constexpr int numPart {32};
-constexpr int maxK {4};
+constexpr int NumHash {256};
+constexpr int NumPart {32};
+constexpr int MaxK {4};
 constexpr int benchmarkSeed {42};
 
 struct rawDomain
@@ -37,7 +37,7 @@ struct domainRecord
 {
     std::string key;
     int size;
-    std::vector<uint32_t> signatures;
+    std::vector<uint64_t> signatures;
 
 };
 struct P_r{

@@ -28,10 +28,10 @@ int readDomains(std::vector<rawDomain> &rawDomains, std::string const& dir){
     return count;
 }
 void benchmarkCOD(rawDomain  *rawDomains, rawDomain  *queries, int n, int q, double threshold, int subset){
-    std::string linearscanOutput = "../output32/cod_linearscan_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(n);
-	std::string lshensembleOutput = "../output32/cod_lshensemble_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(n);
-	std::string accuracyOutput = "../output32/cod_accuracy_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(n);
-    benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
+    std::string linearscanOutput = "_cod_linearscan_threshold=050";
+	std::string lshensembleOutput = "../output/cod_lshensemble_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(n);
+	std::string accuracyOutput = "../output/cod_accuracy_threshold=" + std::to_string(threshold) + ",subset=" + std::to_string(n);
+    // benchmarkLinearscan(rawDomains, queries, n, q, threshold, linearscanOutput);
 	benchmarkLshEnsemble(rawDomains, queries, n, q, threshold, lshensembleOutput);
 	benchmarkAccuracy(linearscanOutput, lshensembleOutput, accuracyOutput);
 
@@ -58,15 +58,26 @@ int main(int argc, char* argv[]) {
 
     int numQuery {int(fracQuery * double(numDomains))};
     std::cout << "size of queries" << numQuery <<"\n";
-    // rawDomain rawDomains_[subsets[i]];
-    // for (int k = 0; k < subsets[i]; k++) {
-    //     rawDomains_[k] = rawDomains[k];
-    // }
-    rawDomain queries[numQuery];
-    srand (benchmarkSeed);
 
+    rawDomain queries[numQuery];
+    // srand (benchmarkSeed);
+    // for(int j = 0; j < numQuery; j++){
+    //     queries[j] = rawDomains[rand() % numDomains];
+    // }
+
+    std::vector<std::string> query;
+    std::ifstream infile("./querynames");
+
+    std::string filename;
+    while (std::getline(infile, filename))
+    {
+        query.push_back(filename);
+    }
     for(int j = 0; j < numQuery; j++){
-        queries[j] = rawDomains[rand() % numDomains];
+        for(int i =0; i < numDomains; i++){
+            if(rawDomains[i].key == query[j]) 
+                queries[j] = rawDomains[i];
+        }
     }
     // Run benchmark
     std::cout << "start benchmark \n";
