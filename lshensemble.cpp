@@ -91,15 +91,17 @@ HashKeyFunc hashKeyFuncGen(int hashValueSize){
 
     return  [hashValueSize](uint64_t *sig, int index, int k) mutable
     {
-        byte s[NumHash*hashValueSize];
+        int p = 0;
+        byte s[k*hashValueSize];
         byte buf[hashValueSize];
         for(int i = index*k; i < (index+1)*k; i++){
             littleEndian(buf, sig[i]);
             for(int j = 0; j < hashValueSize; j++){
-                s[i*hashValueSize + j] = buf[j];
+                s[j + p] = buf[j];
             }
+            p+=hashValueSize;
         }
-        return std::string(s, s + hashValueSize);
+        return std::string(s, s + hashValueSize*k);
     };
 }
 

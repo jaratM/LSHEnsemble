@@ -42,9 +42,9 @@ Param LshForestArray::optimalKL(int x, int q, double t){
     double minEr = boost::math::tools::max_value<double>();
     double currFp{0}, currFn{0}, currEr{0};
     int optK{0}, optL{0};
-    for (int l = 1; l < this->numHash; l++)
+    for (int l = 1; l <= this->numHash; l++)
     {
-        for (int k = 1; k < this->maxk; k++)
+        for (int k = 1; k <= this->maxk; k++)
         {
             if (k*l > this->numHash ){
 				continue;

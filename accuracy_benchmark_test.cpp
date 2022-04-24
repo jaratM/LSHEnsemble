@@ -50,7 +50,7 @@ P_r recallPrecision(queryResult result, queryResult groundTruth){
 	}
 	int overlap = 0;
 	for(auto id : test ){
-		if (truth[id.first]){
+		if (truth.count(id.first)){
 			overlap++;
 		}
 	}
@@ -78,6 +78,7 @@ std::vector<queryResult> readQueryResultFile(std::string queryResultFile){
 		std::string duration{tokens[1].substr(0, tokens[1].size()-1)};
 		results.push_back({candidates, tokens[0], stod(duration)});
 	}
+	infile.close();
 	return results;
 }
 double mean(double *a, int size){

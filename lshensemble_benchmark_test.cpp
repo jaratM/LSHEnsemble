@@ -5,7 +5,33 @@ void minhashDomains(domainRecord *domainRecords, rawDomain *domains, int size) {
     rp::MinHash mh(NumHash, benchmarkSeed);
     for(int i = 0; i < size; i++){
         domainRecords[i] = (domainRecord){domains[i].key, domains[i].values.size(), mh.minhash_universal(domains[i].values)};
+    }    
+}
+
+void readMinhash(domainRecord *domainRecords, rawDomain *domains, int size, std::string filename){
+    std::map<std::string, std::vector<uint64_t>> lines;
+    std::ifstream infile(filename);
+    std::string line;
+    while (std::getline(infile, line)){
+            std::vector<std::string> minhashes;
+            std::istringstream iss(line);
+            std::string token;
+            
+            while(std::getline(iss, token, '\t')) 
+                minhashes.push_back(token);
+            token = minhashes[0];
+            uint64_t value;
+            for(int i = 1; i < minhashes.size(); i++){
+                std::istringstream iss(minhashes[i]);
+                iss >> value;
+                lines[token].push_back(value);
+            }
     }
+    infile.close();
+    for(int i = 0; i < size; i++){
+        domainRecords[i] = (domainRecord){domains[i].key, domains[i].values.size(), lines[domains[i].key]};
+    }
+    
 }
 
 void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, int q,
@@ -14,16 +40,16 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     domainRecord domainRecords[n], queries[q];
     clock_t begin = clock();
     
-    minhashDomains(domainRecords, rawDomains, n);
-
+    // minhashDomains(domainRecords, rawDomains, n);
+    readMinhash(domainRecords, rawDomains, n, "domainsMinhash");
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     std::cout << "Minhash domains in " << elapsed_secs << "\n";
     // outputDomainRecords(domainRecords, n,"signatures/domains");
 
     begin = clock();
-    minhashDomains(queries, rawQueries, q);
-
+    // minhashDomains(queries, rawQueries, q);
+    readMinhash(queries, rawQueries, q, "queriesMinhash");
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     std::cout << "Minhash queries in " << elapsed_secs << "\n";

@@ -8,7 +8,7 @@ using Keys =  std::vector<std::string> ;
 using initHashTable = std::map<std::string, Keys> ;
 HashKeyFunc hashKeyFuncGen(int);
 constexpr double integrationPrecision = 0.01;
-using byte = unsigned char;
+using byte = uint8_t;
 
 
 
