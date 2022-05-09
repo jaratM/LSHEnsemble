@@ -1,6 +1,6 @@
 #ifndef lshensemble_benchmark_test
 #define lshensemble_benchmark_test
-#include "./LSH/minhash.hpp"
+#include "minhash/minhash.hpp"
 #include "bootstrap.hpp"
 void minhashDomains(domainRecord *domainRecords, rawDomain *domains, int size);
 

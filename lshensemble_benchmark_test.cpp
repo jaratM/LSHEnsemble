@@ -2,36 +2,14 @@
 #include "lshensemble_benchmark_test.hpp"
 
 void minhashDomains(domainRecord *domainRecords, rawDomain *domains, int size) {
-    rp::MinHash mh(NumHash, benchmarkSeed);
-    for(int i = 0; i < size; i++){
-        domainRecords[i] = (domainRecord){domains[i].key, domains[i].values.size(), mh.minhash_universal(domains[i].values)};
-    }    
-}
-
-void readMinhash(domainRecord *domainRecords, rawDomain *domains, int size, std::string filename){
-    std::map<std::string, std::vector<uint64_t>> lines;
-    std::ifstream infile(filename);
-    std::string line;
-    while (std::getline(infile, line)){
-            std::vector<std::string> minhashes;
-            std::istringstream iss(line);
-            std::string token;
-            
-            while(std::getline(iss, token, '\t')) 
-                minhashes.push_back(token);
-            token = minhashes[0];
-            uint64_t value;
-            for(int i = 1; i < minhashes.size(); i++){
-                std::istringstream iss(minhashes[i]);
-                iss >> value;
-                lines[token].push_back(value);
-            }
-    }
-    infile.close();
-    for(int i = 0; i < size; i++){
-        domainRecords[i] = (domainRecord){domains[i].key, domains[i].values.size(), lines[domains[i].key]};
-    }
     
+    for(int i = 0; i < size; i++){
+        auto mh = newMinhash(benchmarkSeed, NumHash);
+        for(auto item : domains[i].values){
+            mh->push(reinterpret_cast<const uint8_t*>(&item.first[0]), item.first.length());
+        }
+        domainRecords[i] = (domainRecord){domains[i].key, domains[i].values.size(), mh->signature()};
+    }    
 }
 
 void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, int q,
@@ -40,41 +18,40 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     domainRecord domainRecords[n], queries[q];
     clock_t begin = clock();
     
-    // minhashDomains(domainRecords, rawDomains, n);
-    readMinhash(domainRecords, rawDomains, n, "domainsMinhash");
+    minhashDomains(domainRecords, rawDomains, n);
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     std::cout << "Minhash domains in " << elapsed_secs << "\n";
-    // outputDomainRecords(domainRecords, n,"signatures/domains");
 
     begin = clock();
-    // minhashDomains(queries, rawQueries, q);
-    readMinhash(queries, rawQueries, q, "queriesMinhash");
+    minhashDomains(queries, rawQueries, q);
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     std::cout << "Minhash queries in " << elapsed_secs << "\n";
-    // outputDomainRecords(queries, q, "signatures/queries");
-    // std::cout << domainRecords[0].signatures[0] << "\n";
 
     // sort records
+    begin = clock();
     std::sort(domainRecords, domainRecords + n, &domainRecordSorter);
-
     std::cout << "Start building LSH Ensemble index \n";
     LshEnsemble *index = BootstrapLshEnsembleEquiDepth(NumPart, NumHash, MaxK, n, domainRecords);
-    std::cout << "Finished building LSH Ensemble index \n";
-    std::cout << "Start querying LSH Ensemble index with "<< q << " queries.\n";
+    end = clock();
+    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    std::cout << "Finished building LSH Ensemble index in " << elapsed_secs << "\n";
 
+    std::cout << "Start querying LSH Ensemble index with "<< q << " queries.\n";
+    begin = clock();
     std::vector<queryResult> results;
     queryResult candidates;
     for(int i = 0; i < q; i++){
-        candidates = index->query(queries[i].signatures.data(), queries[i].size, threshold);
+        candidates = index->query(queries[i].signatures, queries[i].size, threshold);
         candidates.queryKey = queries[i].key;
         results.push_back(candidates);
     }
+    end = clock();
+    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     delete index;
-    // delete[] index->partitions;
     outputQueryResults(results, outputFilename);
-    std::cout << "Finished querying LSH Ensemble index, output " << outputFilename;
+    std::cout << "Finished querying LSH Ensemble index in " << elapsed_secs<< " output " << outputFilename << "\n";
 }
 
 

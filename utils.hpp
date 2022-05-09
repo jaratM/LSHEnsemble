@@ -14,8 +14,11 @@
 #include <functional>
 #include <boost/format.hpp>
 #include <boost/math/tools/precision.hpp>
+#include <future>
 
 
+
+using byte = uint8_t;
 
 constexpr int NumHash {256};
 constexpr int NumPart {32};
@@ -37,7 +40,7 @@ struct domainRecord
 {
     std::string key;
     int size;
-    std::vector<uint64_t> signatures;
+    uint64_t *signatures;
 
 };
 struct P_r{

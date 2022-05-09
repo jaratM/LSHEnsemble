@@ -8,7 +8,6 @@ using Keys =  std::vector<std::string> ;
 using initHashTable = std::map<std::string, Keys> ;
 HashKeyFunc hashKeyFuncGen(int);
 constexpr double integrationPrecision = 0.01;
-using byte = uint8_t;
 
 
 
@@ -42,6 +41,11 @@ struct LshEnsemble{
         void prepare(std::string, uint64_t *, int);
         void index();
         queryResult query(uint64_t *, int, double);
+        /**
+         * @brief 
+         * 
+         * @return std::vector<std::string> 
+         */
         std::vector<std::string> queryWithParam(uint64_t *, Param *);
         void computeParams(Param *,int, double);
         ~LshEnsemble();

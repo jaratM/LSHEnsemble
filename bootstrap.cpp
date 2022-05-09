@@ -16,7 +16,7 @@ void bootstrapEquiDepth(LshEnsemble *index, int totalNumDomains, domainRecord *s
         if(currSize > sortedDomains[i].size)
             return;
         currSize = sortedDomains[i].size;
-		index->add(sortedDomains[i].key, sortedDomains[i].signatures.data(), currPart);
+		index->add(sortedDomains[i].key, sortedDomains[i].signatures, currPart);
 		currDepth++;
 		index->partitions[currPart].upper = currSize;
 		if( currDepth >= depth && currPart < NumPart-1) {
