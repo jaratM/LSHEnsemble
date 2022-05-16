@@ -16,30 +16,30 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     double threshold, std::string outputFilename){
 
     domainRecord domainRecords[n], queries[q];
-    clock_t begin = clock();
+    auto begin = std::chrono::high_resolution_clock::now();
     
     minhashDomains(domainRecords, rawDomains, n);
-    clock_t end = clock();
-    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    std::cout << "Minhash domains in " << elapsed_secs << "\n";
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<float> elapsed_secs = end - begin;
+    std::cout << "Minhash domains in " << elapsed_secs.count() << "s\n";
 
-    begin = clock();
+    begin = std::chrono::high_resolution_clock::now();
     minhashDomains(queries, rawQueries, q);
-    end = clock();
-    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    std::cout << "Minhash queries in " << elapsed_secs << "\n";
+    end = std::chrono::high_resolution_clock::now();
+    elapsed_secs = end - begin;
+    std::cout << "Minhash queries in " << elapsed_secs.count() << "s\n";
 
     // sort records
-    begin = clock();
+    begin = std::chrono::high_resolution_clock::now();
     std::sort(domainRecords, domainRecords + n, &domainRecordSorter);
     std::cout << "Start building LSH Ensemble index \n";
     LshEnsemble *index = BootstrapLshEnsembleEquiDepth(NumPart, NumHash, MaxK, n, domainRecords);
-    end = clock();
-    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    std::cout << "Finished building LSH Ensemble index in " << elapsed_secs << "\n";
+    end = std::chrono::high_resolution_clock::now();
+    elapsed_secs = end - begin;
+    std::cout << "Finished building LSH Ensemble index in " << elapsed_secs.count() << "s\n";
 
     std::cout << "Start querying LSH Ensemble index with "<< q << " queries.\n";
-    begin = clock();
+    begin = std::chrono::high_resolution_clock::now();
     std::vector<queryResult> results;
     queryResult candidates;
     for(int i = 0; i < q; i++){
@@ -47,11 +47,11 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
         candidates.queryKey = queries[i].key;
         results.push_back(candidates);
     }
-    end = clock();
-    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<float> elapsed_secs1 = end - begin;
+    std::cout << "Finished querying LSH Ensemble index in " << elapsed_secs1.count() << "s output " << outputFilename << "\n";
     delete index;
     outputQueryResults(results, outputFilename);
-    std::cout << "Finished querying LSH Ensemble index in " << elapsed_secs<< " output " << outputFilename << "\n";
 }
 
 

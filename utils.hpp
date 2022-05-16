@@ -8,13 +8,17 @@
 #include <cctype> 
 #include <stdlib.h>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <iostream>
 #include <functional>
 #include <boost/format.hpp>
 #include <boost/math/tools/precision.hpp>
 #include <future>
+#include <omp.h>
+#include <chrono>
+#include <map>
+
 
 
 
@@ -27,7 +31,7 @@ constexpr int benchmarkSeed {42};
 
 struct rawDomain
 {
-    std::map<std::string, bool> values;
+    std::unordered_map<std::string, bool> values;
     std::string key;
 };
 struct queryResult{
@@ -48,7 +52,16 @@ struct P_r{
     double r;
 };
 
+// struct Key{
+//     int x;
+//     int size;
+//     bool operator<(Key const& a) const { 
+//         return (this->x < a.x && this->size < a.size);
+//     }
+// };
+
 void outputQueryResults(std::vector<queryResult> const& results, std::string output_file_name);
+
 // void outputDomainRecords(domainRecord *records, int size, std::string output_file_name);
 
 

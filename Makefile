@@ -5,7 +5,7 @@ thread = -pthread
 CPP=g++ -std=c++17
 
 all: cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp  utils.cpp ./minhash/minhash.cpp ./minhash/fnv.cpp probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp accuracy_benchmark_test.cpp
-	$(CPP) $(fast) -o cod_benchmark_test cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp  utils.cpp ./minhash/minhash.cpp ./minhash/fnv.cpp probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp accuracy_benchmark_test.cpp 
+	$(CPP) $(fast) -fopenmp -o cod_benchmark_test cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp  utils.cpp ./minhash/minhash.cpp ./minhash/fnv.cpp probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp accuracy_benchmark_test.cpp 
 
 # cod_benchmark_test.o: cod_benchmark_test.cpp
 # 	$(CPP) -c  cod_benchmark_test.cpp

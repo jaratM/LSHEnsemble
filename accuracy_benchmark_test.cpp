@@ -34,11 +34,11 @@ P_r recallPrecision(queryResult result, queryResult groundTruth){
 	if (result.candidates.size() == 0 ){
 		return {0.0, 0.0};
 	}
-	std::map<std::string, bool> truth;
+	std::unordered_map<std::string, bool> truth;
 	for (auto v :groundTruth.candidates){
 		truth[v] = true;
 	}
-    std::map<std::string, bool> test;
+    std::unordered_map<std::string, bool> test;
 	for (auto v : result.candidates){
 		test[v] = true;
 	}

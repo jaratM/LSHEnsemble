@@ -22,7 +22,7 @@ LshForestArray::LshForestArray(int maxk, int numHash){
 //     return new LshForestArray{maxk, numHash, array->data()};
 // }
 
-void LshForestArray::add(std::string key, uint64_t *sig){
+void LshForestArray::add(std::string const& key, uint64_t *sig){
     for(int i = 0; i < this->maxk; i++){
         (this->array)[i].add(key, sig);
     }

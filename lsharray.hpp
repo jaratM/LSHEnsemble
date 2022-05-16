@@ -11,7 +11,7 @@ class LshForestArray
         LshForestArray();
         LshForestArray(int maxk, int numhash);
         ~LshForestArray();
-        void add(std::string, uint64_t *sig);
+        void add(std::string const&, uint64_t *sig);
         void index();
         std::vector<std::string> query(uint64_t *, int, int);
         Param optimalKL(int, int, double);

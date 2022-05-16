@@ -3,10 +3,8 @@
 
 #include "utils.hpp"
 
-using HashKeyFunc = std::function<std::string(uint64_t *, int, int)> ;
 using Keys =  std::vector<std::string> ;
-using initHashTable = std::map<std::string, Keys> ;
-HashKeyFunc hashKeyFuncGen(int);
+using initHashTable = std::unordered_map<std::string, Keys> ;
 constexpr double integrationPrecision = 0.01;
 
 
@@ -37,7 +35,7 @@ struct LshEnsemble{
         int maxK;
         int numHash;
         std::map<std::string, Param> cmap;
-        void add(std::string, uint64_t *, int);
+        void add(std::string const&, uint64_t *, int);
         void prepare(std::string, uint64_t *, int);
         void index();
         queryResult query(uint64_t *, int, double);

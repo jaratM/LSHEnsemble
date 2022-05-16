@@ -1,11 +1,11 @@
 
 #include "linearscan_benchmark_test.hpp"
 
-double computeExactContainment(std::map<std::string, bool> const& query, std::map<std::string, bool> const& domain){
+double computeExactContainment(std::unordered_map<std::string, bool> const& query, std::unordered_map<std::string, bool> const& domain){
     if (query.size()== 0 || domain.size() == 0) {
 		return 0.0;
 	}
-	std::map<std::string, bool> smaller, bigger;
+	std::unordered_map<std::string, bool> smaller, bigger;
 	smaller = (query.size() < domain.size()) ? query : domain;
     bigger = (query.size() >= domain.size()) ? query : domain;
     int intersection = 0;
