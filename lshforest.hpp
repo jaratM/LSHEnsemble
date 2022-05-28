@@ -2,16 +2,19 @@
 #define lshforest
 #include "lshensemble.hpp"
 #include "probability.hpp"
+
+
+
 class Lshforest
 {
     public:
         int k;
         int l;
         int hashValueSize;
-        std::vector<initHashTable> initHashTables;
+        int numIndexedKeys;
         std::vector<hashTable> hashTables;
         Lshforest();
-        Lshforest(int k, int l, int hashValueSize);
+        Lshforest(int k, int l, int hashValueSize, int numIndexedKeys);
         ~Lshforest();
         void add(std::string const&, uint64_t *);
         void index();

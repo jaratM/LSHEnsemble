@@ -10,10 +10,10 @@
 // 	return new LshEnsemble{parts, lshes->data(), maxK, numHash};
 // }
  
-LshEnsemble* NewLshEnsemblePlus(std::vector<Partition> parts, int numHash, int maxk){
+LshEnsemble* NewLshEnsemblePlus(std::vector<Partition> parts, int numHash, int maxk, int initSize){
     std::vector<LshForestArray> lshes(NumPart);
     for(int i = 0; i < NumPart; i++){ 
-            lshes[i] = {maxk, numHash};
+            lshes[i] = {maxk, numHash, initSize};
         }
     return new LshEnsemble{parts, lshes, maxk, numHash};
 }
@@ -89,9 +89,9 @@ void LshEnsemble::computeParams(Param *params, int size, double threshold){
     }
 }
 
-int  binarySearch(hashTable const& v, int prefix, std::string const& q){
+int  binarySearch(hashTable const& v, int size, int prefix, std::string const& q){
 
-	int i = 0, j = v.size();
+	int i = 0, j = size;
     int h;
 	while(i < j){
 		h = int(i+j >> 1); 
@@ -104,7 +104,7 @@ int  binarySearch(hashTable const& v, int prefix, std::string const& q){
 	return i;
 }
 
-bool bucketSorter(Bucket const& domain, Bucket const& domain1){
+bool entrySorter(Entry const& domain, Entry const& domain1){
     return domain.hashKey < domain1.hashKey;
 }
 

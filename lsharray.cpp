@@ -6,9 +6,9 @@ LshForestArray::~LshForestArray(){
 
 LshForestArray::LshForestArray(){}
 
-LshForestArray::LshForestArray(int maxk, int numHash){
+LshForestArray::LshForestArray(int maxk, int numHash, int initSize){
     for (int k = 1; k <= maxk; k++){
-		this->array.push_back({k, numHash/k, 4});
+		this->array.push_back({k, numHash/k, 4, initSize});
 	}
     this->maxk = maxk;
     this->numHash = numHash;

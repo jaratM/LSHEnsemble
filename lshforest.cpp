@@ -4,10 +4,9 @@ Lshforest::Lshforest(){
 }
 Lshforest::~Lshforest()
 {
-    std::vector<initHashTable>().swap(initHashTables);
     std::vector<hashTable>().swap(hashTables);
 }
-Lshforest::Lshforest(int K, int L, int hashValueSize)
+Lshforest::Lshforest(int K, int L, int hashValueSize, int initsize)
 {
     if(K < 0 || L <0){
         std::cerr << "k and l must be positive";
@@ -15,55 +14,47 @@ Lshforest::Lshforest(int K, int L, int hashValueSize)
     this->k = K;
     this->l = L;
     this->hashValueSize = hashValueSize;
-    this->initHashTables.resize(L);
-    this->hashTables.resize(L);
+    this->numIndexedKeys = 0;
+    this->hashTables.resize(initsize);
 }
 
 void Lshforest::add(std::string const& key, uint64_t *sig) {
-   for(int i = 0; i < this->l; i++){
-        this->initHashTables[i][this->HashKeyFunc(sig, i, this->k)].push_back(key);
+    for(int i = 0; i < this->l; i++){
+        this->hashTables[i].push_back({HashKeyFunc(sig, i, k), key});
     }
 }
 
 void Lshforest::index(){ 
-    initHashTable::iterator it;
-    // auto value_selector = [](auto pair){return pair;};
-    for(int i = 0; i < this->l; i++){
-        it = this->initHashTables[i].begin();
-        while(it != this->initHashTables[i].end()){
-            this->hashTables[i].push_back({it->first, it->second});
-            it++;
-        }
-        // std::transform(this->initHashTables[i].begin(), this->initHashTables[i].end(), this->hashTables[i].begin(), value_selector);
-        std::sort(this->hashTables[i].begin(), this->hashTables[i].end(), &bucketSorter);
-        // std::unordered_map<std::string, std::vector<std::string>>().swap(initHashTables[i]);
-    }
+   for(int i = 0; i < this->l; i++){
+       std::sort(this->hashTables[i].begin(), this->hashTables[i].end(), &entrySorter);
+   }
+   this->numIndexedKeys = this->hashTables[0].size();
 }
 
 std::vector<std::string> Lshforest::query(uint64_t *sig, int k, int l){
     if(k == -1) k = this->k;
     if(l == -1) l = this->l;
     int prefixSize = this->hashValueSize * k;
-    std::vector<std::string> hs(l);
+    std::vector<std::string> hashKeys(l);
     for (int i = 0; i < l; i++)
     {
-        hs[i] = HashKeyFunc(sig, i, k);
+        hashKeys[i] = HashKeyFunc(sig, i, k);
     }
     std::unordered_map<std::string, bool> seens;
     std::string hk;
     int p;
     std::vector<std::string> candidates;
+    std::string key;
     for (int i = 0; i < l; i++)
     {
-        hk = hs[i];
-        p = binarySearch(this->hashTables[i], prefixSize, hk);
-        if(p < this->hashTables[i].size() && this->hashTables[i][p].hashKey.substr(0, prefixSize) == hk){
-            for (int j = p; j < this->hashTables[i].size() && this->hashTables[i][j].hashKey.substr(0,prefixSize) == hk; j++) {
-                for(auto const& key : this->hashTables[i][j].keys){
-                    if(seens[key]) continue;
-                    seens[key] = true;
-                    candidates.push_back(key);
-                }
+        hk = hashKeys[i];
+        p = binarySearch(this->hashTables[i], this->numIndexedKeys, prefixSize, hk);
+        if(p < this->numIndexedKeys && this->hashTables[i][p].hashKey.substr(0, prefixSize) == hk){
+            for (int j = p; j < this->numIndexedKeys && this->hashTables[i][j].hashKey.substr(0,prefixSize) == hk; j++) {
+                key = this->hashTables[i][j].key;
+                if(seens[key]) continue;
+                seens[key] = true;
+                candidates.push_back(key);
             }
         }
     }
@@ -98,6 +89,10 @@ void littleEndian(byte *b, uint64_t v){
 	b[1] = byte(v >> 8);
 	b[2] = byte(v >> 16);
 	b[3] = byte(v >> 24);
+    b[4] = byte(v >> 32);
+    b[5] = byte(v >> 40);
+    b[6] = byte(v >> 48);
+    b[7] = byte(v >> 56);
 }
 std::string Lshforest::HashKeyFunc(uint64_t *sig, int index, int k) {
         int p = 0;

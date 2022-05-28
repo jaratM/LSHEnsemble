@@ -9,7 +9,7 @@ class LshForestArray
         int numHash;
         std::vector<Lshforest> array;
         LshForestArray();
-        LshForestArray(int maxk, int numhash);
+        LshForestArray(int maxk, int numhash, int initSize);
         ~LshForestArray();
         void add(std::string const&, uint64_t *sig);
         void index();

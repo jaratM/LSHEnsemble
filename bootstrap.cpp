@@ -2,7 +2,7 @@
 
 LshEnsemble* BootstrapLshEnsembleEquiDepth(int numPart, int numHash, int maxK, int totalNumDomains, domainRecord *sortedDomains){
     std::vector<Partition> parts(numPart);
-    auto index = NewLshEnsemblePlus(parts, numHash, maxK);
+    auto index = NewLshEnsemblePlus(parts, numHash, maxK, totalNumDomains);
     bootstrapEquiDepth(index, totalNumDomains, sortedDomains);
     return index;
 }

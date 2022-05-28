@@ -3,8 +3,8 @@
 
 #include "utils.hpp"
 
-using Keys =  std::vector<std::string> ;
-using initHashTable = std::unordered_map<std::string, Keys> ;
+// using Keys =  std::vector<std::string> ;
+// using initHashTable = std::unordered_map<std::string, Keys> ;
 constexpr double integrationPrecision = 0.01;
 
 
@@ -20,11 +20,11 @@ struct Partition{
     int upper{};
 };
 
-struct Bucket {
+struct Entry {
 	std::string hashKey;
-    Keys keys;
+    std::string key;
 };
-typedef std::vector<Bucket> hashTable;
+typedef std::vector<Entry> hashTable;
 
 class Lshforest;
 class LshForestArray;
@@ -51,10 +51,10 @@ class LshEnsemble{
 
 // LshEnsemble* NewLshEnsemble(Partition [], int, int);
 bool domainRecordSorter(domainRecord const&, domainRecord const&);
-int binarySearch(hashTable const&, int, std::string const &);
-bool bucketSorter(Bucket const&, Bucket const&);
+int binarySearch(hashTable const&, int, int, std::string const &);
+bool entrySorter(Entry const&, Entry const&);
 bool rawDomainSorter(rawDomain const&, rawDomain const&);
-LshEnsemble* NewLshEnsemblePlus(std::vector<Partition>, int, int);
+LshEnsemble* NewLshEnsemblePlus(std::vector<Partition>, int, int, int);
 std::string cashKey(int x, int q, double t);
 // LshForestArray* NewLshForestArray(int, int);
 
