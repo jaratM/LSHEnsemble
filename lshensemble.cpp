@@ -10,7 +10,7 @@
 // 	return new LshEnsemble{parts, lshes->data(), maxK, numHash};
 // }
  
-LshEnsemble* NewLshEnsemblePlus(Partition *parts, int numHash, int maxk){
+LshEnsemble* NewLshEnsemblePlus(std::vector<Partition> parts, int numHash, int maxk){
     std::vector<LshForestArray> lshes(NumPart);
     for(int i = 0; i < NumPart; i++){ 
             lshes[i] = {maxk, numHash};
@@ -19,7 +19,6 @@ LshEnsemble* NewLshEnsemblePlus(Partition *parts, int numHash, int maxk){
 }
 
 LshEnsemble::~LshEnsemble(){
-    delete [] partitions;
     std::vector<LshForestArray>().swap(lshes);
 }
 
@@ -44,11 +43,11 @@ void LshEnsemble::index(){
 }
 
 queryResult LshEnsemble::query(uint64_t *sig, int size, double threshold){
-    Param params[NumPart];
-    this->computeParams(params, size, threshold);
+    std::vector<Param> params(NumPart);
+    this->computeParams(params.data(), size, threshold);
     clock_t begin = clock();
     std::vector<std::string> candidates;
-    candidates = this->queryWithParam(sig, params);
+    candidates = this->queryWithParam(sig, params.data());
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     queryResult results{candidates:candidates, duration:elapsed_secs};

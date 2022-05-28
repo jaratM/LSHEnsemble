@@ -1,7 +1,7 @@
 #include "bootstrap.hpp"
 
 LshEnsemble* BootstrapLshEnsembleEquiDepth(int numPart, int numHash, int maxK, int totalNumDomains, domainRecord *sortedDomains){
-    auto parts = new Partition[numPart];
+    std::vector<Partition> parts(numPart);
     auto index = NewLshEnsemblePlus(parts, numHash, maxK);
     bootstrapEquiDepth(index, totalNumDomains, sortedDomains);
     return index;
@@ -10,7 +10,7 @@ LshEnsemble* BootstrapLshEnsembleEquiDepth(int numPart, int numHash, int maxK, i
 void bootstrapEquiDepth(LshEnsemble *index, int totalNumDomains, domainRecord *sortedDomains){
     int depth = totalNumDomains / NumPart;
     int currDepth{0}, currPart{0}, currSize{0};
-    
+    auto begin = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < totalNumDomains; i++)
     {
         if(currSize > sortedDomains[i].size)
@@ -25,5 +25,12 @@ void bootstrapEquiDepth(LshEnsemble *index, int totalNumDomains, domainRecord *s
 			currDepth = 0;
 		}
     }
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<float> elapsed_secs = end - begin;
+    std::cout << "add() in  " << elapsed_secs.count() << "s\n";
+    begin = std::chrono::high_resolution_clock::now();
     index->index();
+    end = std::chrono::high_resolution_clock::now();
+    elapsed_secs = end - begin;
+    std::cout << "index() in  " << elapsed_secs.count() << "s\n";
 }

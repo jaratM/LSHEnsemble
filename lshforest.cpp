@@ -16,28 +16,28 @@ Lshforest::Lshforest(int K, int L, int hashValueSize)
     this->l = L;
     this->hashValueSize = hashValueSize;
     this->initHashTables.resize(L);
+    this->hashTables.resize(L);
 }
 
 void Lshforest::add(std::string const& key, uint64_t *sig) {
-    std::string tmp;
-    for(int i = 0; i < this->l; i++){
-        tmp = this->HashKeyFunc(sig, i, this->k);
-        this->initHashTables[i][tmp].push_back(key);
+   for(int i = 0; i < this->l; i++){
+        this->initHashTables[i][this->HashKeyFunc(sig, i, this->k)].push_back(key);
     }
 }
 
 void Lshforest::index(){ 
+    initHashTable::iterator it;
+    // auto value_selector = [](auto pair){return pair;};
     for(int i = 0; i < this->l; i++){
-        hashTable ht(this->initHashTables[i].size());
-        int j = 0;
-        for (auto const& x : this->initHashTables[i]){
-            ht[j] = {x.first, x.second};
-            j++;
+        it = this->initHashTables[i].begin();
+        while(it != this->initHashTables[i].end()){
+            this->hashTables[i].push_back({it->first, it->second});
+            it++;
         }
-        std::sort(ht.begin(), ht.end(), &bucketSorter);
-        this->hashTables.push_back(ht);
+        // std::transform(this->initHashTables[i].begin(), this->initHashTables[i].end(), this->hashTables[i].begin(), value_selector);
+        std::sort(this->hashTables[i].begin(), this->hashTables[i].end(), &bucketSorter);
+        // std::unordered_map<std::string, std::vector<std::string>>().swap(initHashTables[i]);
     }
-    std::vector<initHashTable>().swap(initHashTables);
 }
 
 std::vector<std::string> Lshforest::query(uint64_t *sig, int k, int l){
@@ -55,12 +55,11 @@ std::vector<std::string> Lshforest::query(uint64_t *sig, int k, int l){
     std::vector<std::string> candidates;
     for (int i = 0; i < l; i++)
     {
-        auto ht = this->hashTables[i];
         hk = hs[i];
-        p = binarySearch(ht, prefixSize, hk);
-        if(p < ht.size() && ht[p].hashKey.substr(0, prefixSize) == hk){
-            for (int j = p; j < ht.size() && ht[j].hashKey.substr(0,prefixSize) == hk; j++) {
-                for(auto const& key : ht[j].keys){
+        p = binarySearch(this->hashTables[i], prefixSize, hk);
+        if(p < this->hashTables[i].size() && this->hashTables[i][p].hashKey.substr(0, prefixSize) == hk){
+            for (int j = p; j < this->hashTables[i].size() && this->hashTables[i][j].hashKey.substr(0,prefixSize) == hk; j++) {
+                for(auto const& key : this->hashTables[i][j].keys){
                     if(seens[key]) continue;
                     seens[key] = true;
                     candidates.push_back(key);

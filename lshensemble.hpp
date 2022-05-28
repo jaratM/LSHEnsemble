@@ -28,13 +28,13 @@ typedef std::vector<Bucket> hashTable;
 
 class Lshforest;
 class LshForestArray;
-struct LshEnsemble{
+class LshEnsemble{
     public:
-        Partition *partitions;
+        std::vector<Partition> partitions;
         std::vector<LshForestArray> lshes;
         int maxK;
         int numHash;
-        std::map<std::string, Param> cmap;
+        std::unordered_map<std::string, Param> cmap;
         void add(std::string const&, uint64_t *, int);
         void prepare(std::string, uint64_t *, int);
         void index();
@@ -54,7 +54,7 @@ bool domainRecordSorter(domainRecord const&, domainRecord const&);
 int binarySearch(hashTable const&, int, std::string const &);
 bool bucketSorter(Bucket const&, Bucket const&);
 bool rawDomainSorter(rawDomain const&, rawDomain const&);
-LshEnsemble* NewLshEnsemblePlus(Partition *, int, int);
+LshEnsemble* NewLshEnsemblePlus(std::vector<Partition>, int, int);
 std::string cashKey(int x, int q, double t);
 // LshForestArray* NewLshForestArray(int, int);
 

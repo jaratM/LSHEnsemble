@@ -21,7 +21,6 @@
 
 
 
-
 using byte = uint8_t;
 
 constexpr int NumHash {256};
