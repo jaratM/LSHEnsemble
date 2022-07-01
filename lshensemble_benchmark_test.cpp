@@ -33,25 +33,38 @@ void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, i
     begin = std::chrono::high_resolution_clock::now();
     std::sort(domainRecords.data(), domainRecords.data() + n, &domainRecordSorter);
     std::cout << "Start building LSH Ensemble index \n";
-    LshEnsemble *index = BootstrapLshEnsembleEquiDepth(NumPart, NumHash, MaxK, n, domainRecords.data());
+    BootstrapLshEnsembleEquiDepth(NumPart, NumHash, MaxK, n, domainRecords.data());
     end = std::chrono::high_resolution_clock::now();
+
     elapsed_secs = end - begin;
     std::cout << "Finished building LSH Ensemble index in " << elapsed_secs.count() << "s\n";
 
     std::cout << "Start querying LSH Ensemble index with "<< q << " queries.\n";
     begin = std::chrono::high_resolution_clock::now();
-    std::vector<queryResult> results;
+    std::vector<queryResult> results(q);
     queryResult candidates;
-    for(int i = 0; i < q; i++){
-        candidates = index->query(queries[i].signatures, queries[i].size, threshold);
-        candidates.queryKey = queries[i].key;
-        results.push_back(candidates);
+    LshEnsemble *index;
+    for(int j = 0; j < NumPart; j++){
+        index = loadIndex(j);
+        for(int i = 0; i < q; i++){
+            candidates = index->query(queries[i].signatures, queries[i].size, threshold);
+            results[i].queryKey = queries[i].key;
+            results[i].candidates.insert(results[i].candidates.end(), candidates.candidates.begin(), candidates.candidates.end());
+        }
     }
+    
     end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<float> elapsed_secs1 = end - begin;
     std::cout << "Finished querying LSH Ensemble index in " << elapsed_secs1.count() << "s output " << outputFilename << "\n";
-    delete index;
     outputQueryResults(results, outputFilename);
 }
 
+LshEnsemble* loadIndex(int partition){
+    std::ifstream ifs("../indexes/" + std::to_string(partition));
+    boost::archive::text_iarchive ia(ifs);
+    LshEnsemble *index;
+    // restore the schedule from the archive
+    ia >> index;
+    return index;
 
+}

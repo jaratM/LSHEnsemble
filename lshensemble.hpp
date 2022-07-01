@@ -1,37 +1,21 @@
 #ifndef lshensemble
 #define lshensemble
 
-#include "utils.hpp"
+#include "lsharray.hpp"
 
-// using Keys =  std::vector<std::string> ;
-// using initHashTable = std::unordered_map<std::string, Keys> ;
-constexpr double integrationPrecision = 0.01;
-
-
-
-struct Param
-{
-   int k{};
-   int l{};
-};
-
-struct Partition{
-    int lower{};
-    int upper{};
-};
-
-struct Entry {
-	std::string hashKey;
-    std::string key;
-};
-typedef std::vector<Entry> hashTable;
-
-class Lshforest;
-class LshForestArray;
 class LshEnsemble{
+    
     public:
-        std::vector<Partition> partitions;
-        std::vector<LshForestArray> lshes;
+        template<class Archive>
+        void serialize(Archive & ar, const unsigned int version){
+                ar & maxK;
+                ar & numHash;
+                ar & partition;
+                ar & lshes;
+                ar & cmap;
+            }
+        Partition partition;
+        Lshforest lshes;
         int maxK;
         int numHash;
         std::unordered_map<std::string, Param> cmap;
@@ -44,18 +28,15 @@ class LshEnsemble{
          * 
          * @return std::vector<std::string> 
          */
-        std::vector<std::string> queryWithParam(uint64_t *, Param *);
-        void computeParams(Param *,int, double);
+        std::vector<std::string> queryWithParam(uint64_t *, Param const&);
+        Param computeParams(int, double);
+        
         ~LshEnsemble();
 };
 
 // LshEnsemble* NewLshEnsemble(Partition [], int, int);
-bool domainRecordSorter(domainRecord const&, domainRecord const&);
-int binarySearch(hashTable const&, int, int, std::string const &);
-bool entrySorter(Entry const&, Entry const&);
-bool rawDomainSorter(rawDomain const&, rawDomain const&);
-LshEnsemble* NewLshEnsemblePlus(std::vector<Partition>, int, int, int);
-std::string cashKey(int x, int q, double t);
+
+LshEnsemble* NewLshEnsemblePlus(Partition , int, int, int);
 // LshForestArray* NewLshForestArray(int, int);
 
 

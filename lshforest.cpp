@@ -15,7 +15,7 @@ Lshforest::Lshforest(int K, int L, int hashValueSize, int initsize)
     this->l = L;
     this->hashValueSize = hashValueSize;
     this->numIndexedKeys = 0;
-    this->hashTables.resize(initsize);
+    this->hashTables.resize(L);
 }
 
 void Lshforest::add(std::string const& key, uint64_t *sig) {
@@ -97,7 +97,7 @@ void littleEndian(byte *b, uint64_t v){
 std::string Lshforest::HashKeyFunc(uint64_t *sig, int index, int k) {
         int p = 0;
         byte s[k*this->hashValueSize];
-        byte buf[this->hashValueSize];
+        byte buf[8];
         for(int i = index*k; i < (index+1)*k; i++){
             littleEndian(buf, sig[i]);
             for(int j = 0; j < this->hashValueSize; j++){

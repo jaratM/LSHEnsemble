@@ -1,36 +1,40 @@
 #include "bootstrap.hpp"
 
-LshEnsemble* BootstrapLshEnsembleEquiDepth(int numPart, int numHash, int maxK, int totalNumDomains, domainRecord *sortedDomains){
-    std::vector<Partition> parts(numPart);
-    auto index = NewLshEnsemblePlus(parts, numHash, maxK, totalNumDomains);
-    bootstrapEquiDepth(index, totalNumDomains, sortedDomains);
-    return index;
+void BootstrapLshEnsembleEquiDepth(int numPart, int numHash, int maxK, int totalNumDomains, domainRecord *sortedDomains){
+    Partition partition;
+    std::vector<LshEnsemble*> indexes(numPart);
+    for(int i = 0; i < numPart; i++){
+        indexes[i] = NewLshEnsemblePlus(partition, numHash, maxK, totalNumDomains/numPart);
+    }
+    bootstrapEquiDepth(indexes, totalNumDomains, sortedDomains);
+
 }
 
-void bootstrapEquiDepth(LshEnsemble *index, int totalNumDomains, domainRecord *sortedDomains){
+void bootstrapEquiDepth(std::vector<LshEnsemble*> indexes, int totalNumDomains, domainRecord *sortedDomains){
     int depth = totalNumDomains / NumPart;
     int currDepth{0}, currPart{0}, currSize{0};
-    auto begin = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < totalNumDomains; i++)
     {
         if(currSize > sortedDomains[i].size)
             return;
         currSize = sortedDomains[i].size;
-		index->add(sortedDomains[i].key, sortedDomains[i].signatures, currPart);
+		indexes[currPart]->add(sortedDomains[i].key, sortedDomains[i].signatures, currPart);
 		currDepth++;
-		index->partitions[currPart].upper = currSize;
-		if( currDepth >= depth && currPart < NumPart-1) {
+		indexes[currPart]->partition.upper = currSize;
+		if( currDepth >= depth && currPart < NumPart) {
+            indexes[currPart]->index();
+            saveIndex(currPart, indexes[currPart]);
+            delete indexes[currPart];
 			currPart++;
-			index->partitions[currPart].lower = currSize;
+            if(currPart == NumPart) return;
+			indexes[currPart]->partition.lower = currSize;
 			currDepth = 0;
 		}
     }
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<float> elapsed_secs = end - begin;
-    std::cout << "add() in  " << elapsed_secs.count() << "s\n";
-    begin = std::chrono::high_resolution_clock::now();
-    index->index();
-    end = std::chrono::high_resolution_clock::now();
-    elapsed_secs = end - begin;
-    std::cout << "index() in  " << elapsed_secs.count() << "s\n";
+}
+
+void saveIndex(int partition, LshEnsemble *idx){
+    std::ofstream ofs("../indexes/" + std::to_string(partition));
+    boost::archive::text_oarchive oa(ofs);
+    oa << idx;
 }

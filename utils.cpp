@@ -36,3 +36,33 @@ void outputQueryResults(std::vector<queryResult> const& results, std::string out
 //     }
 //     out.close();
 // }
+
+bool entrySorter(Entry const& domain, Entry const& domain1){
+    return domain.hashKey < domain1.hashKey;
+}
+
+bool rawDomainSorter(rawDomain const& domain, rawDomain const& domain1){
+    return domain.values.size() < domain1.values.size();
+}
+
+bool domainRecordSorter(domainRecord const& record1, domainRecord const& record2){
+    return record1.size < record2.size;
+}
+
+std::string cashKey(int x, int q, double t){
+    return boost::str(boost::format("%d %d %.2f") % x % q % t);
+}
+
+int  binarySearch(hashTable const& v, int size, int prefix, std::string const& q){
+    int i = 0, j = size;
+    int h;
+    while(i < j){
+        h = int(i+j >> 1); 
+        if(!(v[h].hashKey.substr(0, prefix) >= q)) {
+            i = h + 1;
+        } else {
+            j = h;
+        }
+    }
+    return i;
+}

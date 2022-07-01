@@ -1,13 +1,21 @@
 #ifndef lshforest
 #define lshforest
-#include "lshensemble.hpp"
-#include "probability.hpp"
+#include "utils.hpp"
 
 
 
 class Lshforest
 {
+    
     public:
+        template<class Archive>
+        void serialize(Archive & ar, const unsigned int version){
+                ar & k;
+                ar & l;
+                ar & hashValueSize;
+                ar & numIndexedKeys;
+                ar & hashTables;
+            }
         int k;
         int l;
         int hashValueSize;
@@ -21,6 +29,7 @@ class Lshforest
         std::vector<std::string> query(uint64_t *, int, int);
         Param optimalKL(int, int, double);
         std::string HashKeyFunc(uint64_t *sig, int index, int k);
+        
 
 };
 #endif

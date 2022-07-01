@@ -7,4 +7,6 @@ void minhashDomains(domainRecord *domainRecords, rawDomain *domains, int size);
 void benchmarkLshEnsemble(rawDomain *rawDomains, rawDomain *rawQueries, int n, int q,
     double threshold, std::string output_filename);
 
+LshEnsemble* loadIndex(int);
+
 #endif /* lshensemble_benchmark_test */
