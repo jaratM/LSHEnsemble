@@ -15,7 +15,7 @@ class LshEnsemble{
                 ar & cmap;
             }
         Partition partition;
-        Lshforest lshes;
+        LshForestArray lshes;
         int maxK;
         int numHash;
         std::unordered_map<std::string, Param> cmap;

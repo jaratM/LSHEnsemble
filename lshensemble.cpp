@@ -11,8 +11,7 @@
 // }
  
 LshEnsemble* NewLshEnsemblePlus(Partition partition, int numHash, int maxk, int initSize){
-    // int hashValueSize = 4;
-    return new LshEnsemble{partition, Lshforest{maxk, numHash/maxk, 4, initSize}, maxk, numHash};
+    return new LshEnsemble{partition, {maxk, numHash, initSize}, maxk, numHash};
 }
 
 LshEnsemble::~LshEnsemble(){

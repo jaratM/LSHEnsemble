@@ -36,7 +36,7 @@
 using byte = uint8_t;
 
 constexpr int NumHash {256};
-constexpr int NumPart {2};
+constexpr int NumPart {32};
 constexpr int MaxK {4};
 constexpr int benchmarkSeed {42};
 

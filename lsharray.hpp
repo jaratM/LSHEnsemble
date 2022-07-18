@@ -5,6 +5,12 @@
 class LshForestArray
 {
     public:
+        template<class Archive>
+        void serialize(Archive & ar, const unsigned int version){
+            ar & maxk;
+            ar & numHash;
+            ar & array;
+        }
         int maxk;
         int numHash;
         std::vector<Lshforest> array;

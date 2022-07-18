@@ -4,7 +4,7 @@ void BootstrapLshEnsembleEquiDepth(int numPart, int numHash, int maxK, int total
     Partition partition;
     std::vector<LshEnsemble*> indexes(numPart);
     for(int i = 0; i < numPart; i++){
-        indexes[i] = NewLshEnsemblePlus(partition, numHash, maxK, totalNumDomains/numPart);
+        indexes[i] = NewLshEnsemblePlus(partition, numHash, maxK, totalNumDomains);
     }
     bootstrapEquiDepth(indexes, totalNumDomains, sortedDomains);
 
@@ -21,16 +21,18 @@ void bootstrapEquiDepth(std::vector<LshEnsemble*> indexes, int totalNumDomains, 
 		indexes[currPart]->add(sortedDomains[i].key, sortedDomains[i].signatures, currPart);
 		currDepth++;
 		indexes[currPart]->partition.upper = currSize;
-		if( currDepth >= depth && currPart < NumPart) {
+		if( currDepth >= depth && currPart < NumPart -1 ) {
             indexes[currPart]->index();
             saveIndex(currPart, indexes[currPart]);
             delete indexes[currPart];
 			currPart++;
-            if(currPart == NumPart) return;
 			indexes[currPart]->partition.lower = currSize;
 			currDepth = 0;
 		}
     }
+    indexes[currPart]->index();
+    saveIndex(currPart, indexes[currPart]);
+    delete indexes[currPart];
 }
 
 void saveIndex(int partition, LshEnsemble *idx){
