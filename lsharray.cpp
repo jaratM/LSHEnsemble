@@ -7,20 +7,13 @@ LshForestArray::~LshForestArray(){
 LshForestArray::LshForestArray(){}
 
 LshForestArray::LshForestArray(int maxk, int numHash, int initSize){
+    int hashValueSize = 4;
     for (int k = 1; k <= maxk; k++){
-		this->array.push_back({k, numHash/k, 4, initSize});
+		this->array.push_back({k, numHash/k, hashValueSize, initSize});
 	}
     this->maxk = maxk;
     this->numHash = numHash;
 }
-
-// LshForestArray* NewLshForestArray(int maxk, int numHash){
-//     auto array = new std::vector<Lshforest>();
-//     for (int k = 1; k <= maxk; k++){
-// 		array->push_back({k, numHash/k, 4});
-// 	}
-//     return new LshForestArray{maxk, numHash, array->data()};
-// }
 
 void LshForestArray::add(std::string const& key, uint64_t *sig){
     for(int i = 0; i < this->maxk; i++){

@@ -66,9 +66,9 @@ Param Lshforest::optimalKL(int x, int q, double t){
     double minEr = boost::math::tools::max_value<double>();
     double currFp{}, currFn{}, currEr{};
     int optK{}, optL{};
-    for (int l = 1; l < this->l; l++)
+    for (int l = 1; l <= this->l; l++)
     {
-        for (int k = 1; k < this->k; k++)
+        for (int k = 1; k <= this->k; k++)
         {
             currFp = probFalsePositive(x, q, l, k, t, integrationPrecision);
             currFn = probFalseNegative(x, q, l, k, t, integrationPrecision);
@@ -97,7 +97,7 @@ void littleEndian(byte *b, uint64_t v){
 std::string Lshforest::HashKeyFunc(uint64_t *sig, int index, int k) {
         int p = 0;
         byte s[k*this->hashValueSize];
-        byte buf[this->hashValueSize];
+        byte buf[8];
         for(int i = index*k; i < (index+1)*k; i++){
             littleEndian(buf, sig[i]);
             for(int j = 0; j < this->hashValueSize; j++){

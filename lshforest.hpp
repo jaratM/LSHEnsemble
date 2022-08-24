@@ -1,7 +1,6 @@
 #ifndef lshforest
 #define lshforest
 #include "lshensemble.hpp"
-#include "probability.hpp"
 
 
 
