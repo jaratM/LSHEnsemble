@@ -1,8 +1,0 @@
-/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/bin/ld.gold: error: lsh_ensemble.o: 
-multiple definition of 'outputDomainRecords(domainRecord*, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)'
-/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/bin/ld.gold: cod_benchmark_test.o: previous definition here
-/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/bin/ld.gold: error: lsh_ensemble.o:
- multiple definition of 'outputQueryResults(std::vector<queryResult, std::allocator<queryResult> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)'
-/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/bin/ld.gold: cod_benchmark_test.o: previous definition here
-collect2: error: ld returned 1 exit status
-make: *** [Makefile:10: cod_benchmark_test] Error 1

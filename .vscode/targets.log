@@ -1,0 +1,529 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-redhat-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Sun Aug 28 13:12:23 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+__LMOD_REF_COUNT_CMAKE_PREFIX_PATH = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0:1;/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0:1;/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0:1;/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0:1;/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0:1;/srv/software/easybuild/software/GCCcore/10.2.0:1
+# default
+.SHELLFLAGS := -c
+# environment
+VSCODE_AGENT_FOLDER = /home/mohamed.jarat/.vscode-server
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+MODULEPATH = /opt/ohpc/pub/modulefiles:/srv/software/easybuild/modules/all:/srv/software/modulefiles
+# environment
+LMOD_PREPEND_BLOCK = normal
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+_ModuleTable001_ = X01vZHVsZVRhYmxlXyA9IHsKTVR2ZXJzaW9uID0gMywKY19yZWJ1aWxkVGltZSA9IGZhbHNlLApjX3Nob3J0VGltZSA9IGZhbHNlLApkZXB0aFQgPSB7fSwKZmFtaWx5ID0ge30sCm1UID0gewpCb29zdCA9IHsKZm4gPSAiL3Nydi9zb2Z0d2FyZS9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvQm9vc3QvMS43NC4wLUdDQy0xMC4yLjAubHVhIiwKZnVsbE5hbWUgPSAiQm9vc3QvMS43NC4wLUdDQy0xMC4yLjAiLApsb2FkT3JkZXIgPSA5LApwcm9wVCA9IHt9LApzdGFja0RlcHRoID0gMCwKc3RhdHVzID0gImFjdGl2ZSIsCnVzZXJOYW1lID0gIkJvb3N0IiwKd1YgPSAiMDAwMDAwMDAxLjAwMDAwMDA3NC4qZ2NjLip6ZmluYWwtLjAwMDAwMDAxMC4wMDAwMDAwMDIuKnpmaW5hbCIsCn0s
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+define BASH_FUNC_ml%%
+() {  eval $($LMOD_DIR/ml_cmd "$@")
+}
+endef
+# environment
+EBDEVELGCC = /srv/software/easybuild/software/GCC/10.2.0/easybuild/GCC-10.2.0-easybuild-devel
+# makefile
+CURDIR := /home/mohamed.jarat/Desktop/LSHEnsemble
+# makefile
+SHELL = /bin/sh
+# environment
+EBVERSIONXZ = 5.2.5
+# environment
+LMOD_DIR = /opt/ohpc/admin/lmod/lmod/libexec
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+# environment
+EBROOTBOOST = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0
+# environment
+_ = /usr/bin/make
+# makefile (from 'Makefile', line 6)
+serialize = -lboost_serialization -lboost_system 
+# environment
+EBROOTZLIB = /srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+UCX_NET_DEVICES = mlx5_1:1
+# automatic
+@F = $(notdir $@)
+# environment
+HISTCONTROL = ignoredups
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+EBDEVELBZIP2 = /srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/easybuild/bzip2-1.0.8-GCCcore-10.2.0-easybuild-devel
+# environment
+_ModuleTable002_ = CkdDQyA9IHsKZm4gPSAiL3Nydi9zb2Z0d2FyZS9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvR0NDLzEwLjIuMC5sdWEiLApmdWxsTmFtZSA9ICJHQ0MvMTAuMi4wIiwKbG9hZE9yZGVyID0gNiwKcHJvcFQgPSB7fSwKc3RhY2tEZXB0aCA9IDEsCnN0YXR1cyA9ICJhY3RpdmUiLAp1c2VyTmFtZSA9ICJHQ0MvMTAuMi4wIiwKd1YgPSAiMDAwMDAwMDEwLjAwMDAwMDAwMi4qemZpbmFsIiwKfSwKR0NDY29yZSA9IHsKZm4gPSAiL3Nydi9zb2Z0d2FyZS9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvR0NDY29yZS8xMC4yLjAubHVhIiwKZnVsbE5hbWUgPSAiR0NDY29yZS8xMC4yLjAiLApsb2FkT3JkZXIgPSAzLApwcm9wVCA9IHt9LApzdGFja0RlcHRoID0gMiwKc3RhdHVzID0gImFjdGl2ZSIs
+# environment
+MAKELEVEL := 0
+# environment
+XDG_DATA_DIRS = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/share:/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/share:/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/share:/srv/software/easybuild/software/GCCcore/10.2.0/share
+# environment
+LMOD_COLORIZE = no
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1853005341/bus
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+__LMOD_REF_COUNT_LIBRARY_PATH = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0/lib:1;/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/lib:1;/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/lib:1;/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/lib:1;/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/lib:1
+# environment
+LESSOPEN = ||/usr/bin/lesspipe.sh %s
+# environment
+LC_NAME = ar_MA.UTF-8
+# makefile (from 'Makefile', line 5)
+CPP = g++ -std=c++17
+# environment
+VSCODE_CWD = /home/mohamed.jarat
+# environment
+EBVERSIONBZIP2 = 1.0.8
+# makefile (from 'Makefile', line 3)
+debug = -g -fsanitize=address
+# environment
+LMOD_FULL_SETTARG_SUPPORT = no
+# environment
+EBVERSIONBINUTILS = 2.35
+# environment
+SSH_CONNECTION = 10.16.16.2 60146 10.16.1.41 22
+# environment
+PATH = /home/mohamed.jarat/.vscode-server/bin/dfd34e8260c270da74b5c2d86d61aee4b6d56977/bin/remote-cli:/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/bin:/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/bin:/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/bin:/srv/software/easybuild/software/GCCcore/10.2.0/bin:/srv/software/slurm-aux/bin:/srv/software/easybuild/software/Anaconda3/2020.11/bin:/srv/software/easybuild/software/Anaconda3/2020.11/condabin:/home/mohamed.jarat/.local/bin:/home/mohamed.jarat/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/mohamed.jarat/local/go/bin
+# environment
+__LMOD_REF_COUNT_PATH = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/bin:1;/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/bin:1;/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/bin:1;/srv/software/easybuild/software/GCCcore/10.2.0/bin:1;/srv/software/slurm-aux/bin:1;/srv/software/easybuild/software/Anaconda3/2020.11/bin:1;/srv/software/easybuild/software/Anaconda3/2020.11/condabin:1;/home/mohamed.jarat/.local/bin:1;/home/mohamed.jarat/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/sbin:1;/home/mohamed.jarat/local/go/bin:1
+# environment
+LMOD_CMD = /opt/ohpc/admin/lmod/lmod/libexec/lmod
+# environment
+LC_ADDRESS = ar_MA.UTF-8
+# environment
+LIBRARY_PATH = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0/lib:/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/lib:/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/lib:/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/lib:/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/lib
+# environment
+CPATH = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0/include:/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/include:/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/include:/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/include:/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/include
+# environment
+FPATH = /opt/ohpc/admin/lmod/lmod/init/ksh_funcs
+# environment
+BASH_ENV = /opt/ohpc/admin/lmod/lmod/init/bash
+# environment
+CONDA_PREFIX = /srv/software/easybuild/software/Anaconda3/2020.11
+# environment
+VSCODE_LOG_STACK = false
+# environment
+LC_NUMERIC = ar_MA.UTF-8
+# environment
+_ModuleTable003_ = CnVzZXJOYW1lID0gIkdDQ2NvcmUvMTAuMi4wIiwKd1YgPSAiMDAwMDAwMDEwLjAwMDAwMDAwMi4qemZpbmFsIiwKfSwKWFogPSB7CmZuID0gIi9zcnYvc29mdHdhcmUvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL1haLzUuMi41LUdDQ2NvcmUtMTAuMi4wLmx1YSIsCmZ1bGxOYW1lID0gIlhaLzUuMi41LUdDQ2NvcmUtMTAuMi4wIiwKbG9hZE9yZGVyID0gOCwKcHJvcFQgPSB7fSwKc3RhY2tEZXB0aCA9IDEsCnN0YXR1cyA9ICJhY3RpdmUiLAp1c2VyTmFtZSA9ICJYWi81LjIuNS1HQ0Njb3JlLTEwLjIuMCIsCndWID0gIjAwMDAwMDAwNS4wMDAwMDAwMDIuMDAwMDAwMDA1LipnY2Njb3JlLip6ZmluYWwtLjAwMDAwMDAxMC4wMDAwMDAwMDIuKnpmaW5hbCIsCn0sCmJpbnV0aWxzID0g
+# environment
+VSCODE_IPC_HOOK_CLI = /run/user/1853005341/vscode-ipc-deef46c0-bc5a-48b2-84e2-ec39e1c717a4.sock
+# environment
+LMOD_VERSION = 8.5.22
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+CMAKE_PREFIX_PATH = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0:/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0:/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0:/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0:/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0:/srv/software/easybuild/software/GCCcore/10.2.0
+# environment
+__LMOD_REF_COUNT_MANPATH = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/share/man:1;/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/man:1;/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/share/man:1;/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/share/man:1;/srv/software/easybuild/software/GCCcore/10.2.0/share/man:1;/usr/share/man:1
+# automatic
+%F = $(notdir $%)
+# environment
+EBVERSIONGCC = 10.2.0
+# environment
+CONDA_EXE = /srv/software/easybuild/software/Anaconda3/2020.11/bin/conda
+# default
+MAKEFILES := 
+# environment
+__LMOD_REF_COUNT_LD_LIBRARY_PATH = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0/lib:1;/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/lib:1;/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/lib:1;/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/lib:1;/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/lib:1;/srv/software/easybuild/software/GCCcore/10.2.0/lib64:1;/srv/software/easybuild/software/GCCcore/10.2.0/lib:1
+# environment
+EBDEVELBINUTILS = /srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/easybuild/binutils-2.35-GCCcore-10.2.0-easybuild-devel
+# environment
+EBROOTGCC = /srv/software/easybuild/software/GCCcore/10.2.0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /home/mohamed.jarat/Desktop/LSHEnsemble
+# environment
+__LMOD_REF_COUNT_CMAKE_LIBRARY_PATH = /srv/software/easybuild/software/GCCcore/10.2.0/lib64:1
+# default
+.LOADED := 
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+PKG_CONFIG_PATH = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/lib/pkgconfig:/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/lib/pkgconfig:/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/lib/pkgconfig
+# environment
+__LMOD_REF_COUNT_PKG_CONFIG_PATH = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/lib/pkgconfig:1;/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/lib/pkgconfig:1;/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/lib/pkgconfig:1
+# environment
+EBDEVELGCCCORE = /srv/software/easybuild/software/GCCcore/10.2.0/easybuild/GCCcore-10.2.0-easybuild-devel
+# environment
+MANPATH = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/share/man:/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/man:/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/share/man:/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/share/man:/srv/software/easybuild/software/GCCcore/10.2.0/share/man:/usr/share/man::
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/mohamed.jarat
+# environment
+LD_LIBRARY_PATH = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0/lib:/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/lib:/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/lib:/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/lib:/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/lib:/srv/software/easybuild/software/GCCcore/10.2.0/lib64:/srv/software/easybuild/software/GCCcore/10.2.0/lib
+# environment
+MODULESHOME = /opt/ohpc/admin/lmod/lmod
+# environment
+LOGNAME = mohamed.jarat
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+CONDA_PROMPT_MODIFIER = (base) 
+# automatic
++F = $(notdir $+)
+# environment
+EBDEVELXZ = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/easybuild/XZ-5.2.5-GCCcore-10.2.0-easybuild-devel
+# environment
+_ModuleTable005_ = dWEiLApmdWxsTmFtZSA9ICJiemlwMi8xLjAuOC1HQ0Njb3JlLTEwLjIuMCIsCmxvYWRPcmRlciA9IDcsCnByb3BUID0ge30sCnN0YWNrRGVwdGggPSAxLApzdGF0dXMgPSAiYWN0aXZlIiwKdXNlck5hbWUgPSAiYnppcDIvMS4wLjgtR0NDY29yZS0xMC4yLjAiLAp3ViA9ICIwMDAwMDAwMDEuMDAwMDAwMDAwLjAwMDAwMDAwOC4qZ2NjY29yZS4qemZpbmFsLS4wMDAwMDAwMTAuMDAwMDAwMDAyLip6ZmluYWwiLAp9LApyaGVsOCA9IHsKZm4gPSAiL3Nydi9zb2Z0d2FyZS9tb2R1bGVmaWxlcy9yaGVsOC9nbG9iYWwiLApmdWxsTmFtZSA9ICJyaGVsOC9nbG9iYWwiLApsb2FkT3JkZXIgPSAyLApwcm9wVCA9IHt9LApzdGFja0RlcHRoID0gMSwKc3RhdHVzID0gImFjdGl2ZSIsCnVz
+# environment
+EBROOTBZIP2 = /srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0
+# environment
+EBROOTBINUTILS = /srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+MAKE_VERSION := 4.2.1
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+HOSTNAME = slurm-login-h23d5-u38-svn1.cloud.um6p.ma
+# environment
+LC_TIME = ar_MA.UTF-8
+# environment
+CONDA_DEFAULT_ENV = base
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+_ModuleTable_Sz_ = 7
+# environment
+SHLVL = 6
+# makefile (from 'Makefile', line 1)
+CC = gcc
+# environment
+BOOST_ROOT = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0
+# environment
+OMP_NUM_THREADS = 1
+# environment
+XDG_SESSION_ID = 694
+# environment
+USER = mohamed.jarat
+# environment
+LC_MONETARY = ar_MA.UTF-8
+# makefile
+.DEFAULT_GOAL := all
+# default
+MAKECMDGOALS := all
+# environment
+__LMOD_REF_COUNT_LOADEDMODULES = slurm-aux/1.0.0:1;rhel8/global:1;GCCcore/10.2.0:1;zlib/1.2.11-GCCcore-10.2.0:1;binutils/2.35-GCCcore-10.2.0:1;GCC/10.2.0:1;bzip2/1.0.8-GCCcore-10.2.0:1;XZ/5.2.5-GCCcore-10.2.0:1;Boost/1.74.0-GCC-10.2.0:1
+# environment
+LMOD_SETTARG_CMD = :
+# environment
+EBDEVELBOOST = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0/easybuild/Boost-1.74.0-GCC-10.2.0-easybuild-devel
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+LC_TELEPHONE = ar_MA.UTF-8
+# environment
+CONDA_SHLVL = 1
+# default
+MAKE_COMMAND := make
+# environment
+PYTHONDONTWRITEBYTECODE = 1
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+define BASH_FUNC_module%%
+() {  eval $($LMOD_CMD bash "$@") && eval $(${LMOD_SETTARG_CMD:-:} -s sh)
+}
+endef
+# environment
+I_MPI_PMI_LIBRARY = /opt/ohpc/admin/pmix/lib/libpmi2.so
+# makefile
+MAKEFLAGS = pqrR
+# environment
+_ModuleTable004_ = ewpmbiA9ICIvc3J2L3NvZnR3YXJlL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9iaW51dGlscy8yLjM1LUdDQ2NvcmUtMTAuMi4wLmx1YSIsCmZ1bGxOYW1lID0gImJpbnV0aWxzLzIuMzUtR0NDY29yZS0xMC4yLjAiLApsb2FkT3JkZXIgPSA1LApwcm9wVCA9IHt9LApzdGFja0RlcHRoID0gMiwKc3RhdHVzID0gImFjdGl2ZSIsCnVzZXJOYW1lID0gImJpbnV0aWxzLzIuMzUtR0NDY29yZS0xMC4yLjAiLAp3ViA9ICIwMDAwMDAwMDIuMDAwMDAwMDM1LipnY2Njb3JlLip6ZmluYWwtLjAwMDAwMDAxMC4wMDAwMDAwMDIuKnpmaW5hbCIsCn0sCmJ6aXAyID0gewpmbiA9ICIvc3J2L3NvZnR3YXJlL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9iemlwMi8xLjAuOC1HQ0Njb3JlLTEwLjIuMC5s
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_CLIENT = 10.16.16.2 60146 22
+# environment
+MAIL = /var/spool/mail/mohamed.jarat
+# environment
+LOADEDMODULES = slurm-aux/1.0.0:rhel8/global:GCCcore/10.2.0:zlib/1.2.11-GCCcore-10.2.0:binutils/2.35-GCCcore-10.2.0:GCC/10.2.0:bzip2/1.0.8-GCCcore-10.2.0:XZ/5.2.5-GCCcore-10.2.0:Boost/1.74.0-GCC-10.2.0
+# environment
+__LMOD_REF_COUNT__LMFILES_ = /srv/software/modulefiles/slurm-aux/1.0.0:1;/srv/software/modulefiles/rhel8/global:1;/srv/software/easybuild/modules/all/GCCcore/10.2.0.lua:1;/srv/software/easybuild/modules/all/zlib/1.2.11-GCCcore-10.2.0.lua:1;/srv/software/easybuild/modules/all/binutils/2.35-GCCcore-10.2.0.lua:1;/srv/software/easybuild/modules/all/GCC/10.2.0.lua:1;/srv/software/easybuild/modules/all/bzip2/1.0.8-GCCcore-10.2.0.lua:1;/srv/software/easybuild/modules/all/XZ/5.2.5-GCCcore-10.2.0.lua:1;/srv/software/easybuild/modules/all/Boost/1.74.0-GCC-10.2.0.lua:1
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+LC_PAPER = ar_MA.UTF-8
+# environment
+define BASH_FUNC_which%%
+() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+endef
+# environment
+BROWSER = /home/mohamed.jarat/.vscode-server/bin/dfd34e8260c270da74b5c2d86d61aee4b6d56977/bin/helpers/browser.sh
+# environment
+LMOD_PKG = /opt/ohpc/admin/lmod/lmod
+# environment
+EBDEVELZLIB = /srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/easybuild/zlib-1.2.11-GCCcore-10.2.0-easybuild-devel
+ 
+# makefile (from 'Makefile', line 4)
+thread = -pthread 
+# environment
+EBVERSIONGCCCORE = 10.2.0
+# environment
+CMAKE_LIBRARY_PATH = /srv/software/easybuild/software/GCCcore/10.2.0/lib64
+# environment
+EBVERSIONBOOST = 1.74.0
+# environment
+EBROOTGCCCORE = /srv/software/easybuild/software/GCCcore/10.2.0
+# automatic
+<F = $(notdir $<)
+# environment
+_LMFILES_ = /srv/software/modulefiles/slurm-aux/1.0.0:/srv/software/modulefiles/rhel8/global:/srv/software/easybuild/modules/all/GCCcore/10.2.0.lua:/srv/software/easybuild/modules/all/zlib/1.2.11-GCCcore-10.2.0.lua:/srv/software/easybuild/modules/all/binutils/2.35-GCCcore-10.2.0.lua:/srv/software/easybuild/modules/all/GCC/10.2.0.lua:/srv/software/easybuild/modules/all/bzip2/1.0.8-GCCcore-10.2.0.lua:/srv/software/easybuild/modules/all/XZ/5.2.5-GCCcore-10.2.0.lua:/srv/software/easybuild/modules/all/Boost/1.74.0-GCC-10.2.0.lua
+# environment
+__LMOD_REF_COUNT_XDG_DATA_DIRS = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/share:1;/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/share:1;/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/share:1;/srv/software/easybuild/software/GCCcore/10.2.0/share:1
+# environment
+LC_MEASUREMENT = ar_MA.UTF-8
+# environment
+EBVERSIONZLIB = 1.2.11
+# environment
+EBROOTXZ = /srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0
+# environment
+LC_ALL = C
+# makefile (from 'Makefile', line 2)
+fast = -Ofast
+# environment
+CONDA_PYTHON_EXE = /srv/software/easybuild/software/Anaconda3/2020.11/bin/python
+# automatic
+^F = $(notdir $^)
+# environment
+__LMOD_SET_FPATH = 1
+# default
+SUFFIXES := 
+# environment
+HISTSIZE = 1000
+# environment
+_CE_M = 
+# environment
+LMOD_ROOT = /opt/ohpc/admin/lmod
+# environment
+LMOD_SETTARG_FULL_SUPPORT = no
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+LC_IDENTIFICATION = ar_MA.UTF-8
+# default
+.RECIPEPREFIX := 
+# environment
+__LMOD_REF_COUNT_MODULEPATH = /opt/ohpc/pub/modulefiles:1;/srv/software/easybuild/modules/all:1;/srv/software/modulefiles:1
+# default
+MAKE_HOST := x86_64-redhat-linux-gnu
+# environment
+XDG_RUNTIME_DIR = /run/user/1853005341
+# environment
+__LMOD_REF_COUNT_CPATH = /srv/software/easybuild/software/Boost/1.74.0-GCC-10.2.0/include:1;/srv/software/easybuild/software/XZ/5.2.5-GCCcore-10.2.0/include:1;/srv/software/easybuild/software/bzip2/1.0.8-GCCcore-10.2.0/include:1;/srv/software/easybuild/software/binutils/2.35-GCCcore-10.2.0/include:1;/srv/software/easybuild/software/zlib/1.2.11-GCCcore-10.2.0/include:1
+# environment
+LANG = C
+# environment
+_ModuleTable007_ = Mi4wIiwKbG9hZE9yZGVyID0gNCwKcHJvcFQgPSB7fSwKc3RhY2tEZXB0aCA9IDMsCnN0YXR1cyA9ICJhY3RpdmUiLAp1c2VyTmFtZSA9ICJ6bGliLzEuMi4xMS1HQ0Njb3JlLTEwLjIuMCIsCndWID0gIjAwMDAwMDAwMS4wMDAwMDAwMDIuMDAwMDAwMDExLipnY2Njb3JlLip6ZmluYWwtLjAwMDAwMDAxMC4wMDAwMDAwMDIuKnpmaW5hbCIsCn0sCn0sCm1wYXRoQSA9IHsKIi9vcHQvb2hwYy9wdWIvbW9kdWxlZmlsZXMiLCAiL3Nydi9zb2Z0d2FyZS9lYXN5YnVpbGQvbW9kdWxlcy9hbGwiLCAiL3Nydi9zb2Z0d2FyZS9tb2R1bGVmaWxlcyIsCn0sCnN5c3RlbUJhc2VNUEFUSCA9ICIvb3B0L29ocGMvcHViL21vZHVsZWZpbGVzIiwKfQo=
+# environment
+which_declare = declare -f
+# environment
+I_MPI_OFI_PROVIDER = mlx
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# environment
+_ModuleTable006_ = ZXJOYW1lID0gInJoZWw4L2dsb2JhbCIsCndWID0gIipnbG9iYWwuKnpmaW5hbCIsCn0sClsic2x1cm0tYXV4Il0gPSB7CmZuID0gIi9zcnYvc29mdHdhcmUvbW9kdWxlZmlsZXMvc2x1cm0tYXV4LzEuMC4wIiwKZnVsbE5hbWUgPSAic2x1cm0tYXV4LzEuMC4wIiwKbG9hZE9yZGVyID0gMSwKcHJvcFQgPSB7fSwKc3RhY2tEZXB0aCA9IDEsCnN0YXR1cyA9ICJhY3RpdmUiLAp1c2VyTmFtZSA9ICJzbHVybS1hdXgiLAp3ViA9ICIwMDAwMDAwMDEuKnpmaW5hbCIsCn0sCnpsaWIgPSB7CmZuID0gIi9zcnYvc29mdHdhcmUvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL3psaWIvMS4yLjExLUdDQ2NvcmUtMTAuMi4wLmx1YSIsCmZ1bGxOYW1lID0gInpsaWIvMS4yLjExLUdDQ2NvcmUtMTAu
+# environment
+_CE_CONDA = 
+# variable set hash-table stats:
+# Load=166/1024=16%, Rehash=0, Collisions=32/197=16%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 46, inode 4843236212): 41 files, no impossibilities.
+
+# 41 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+linearscan_benchmark_test.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-15 00:06:45.555451
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+lsharray.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 13:10:01.708705
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+minhash/minhash.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-26 05:50:37.92163
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+lshensemble_benchmark_test.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 13:10:01.725794
+#  File has been updated.
+#  Successfully updated.
+
+all: cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp utils.cpp minhash/minhash.cpp minhash/fnv.cpp probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp accuracy_benchmark_test.cpp
+#  Command line target.
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := all
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp utils.cpp minhash/minhash.cpp minhash/fnv.cpp probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp accuracy_benchmark_test.cpp
+# automatic
+# | := 
+# automatic
+# < := cod_benchmark_test.cpp
+# automatic
+# ^ := cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp utils.cpp minhash/minhash.cpp minhash/fnv.cpp probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp accuracy_benchmark_test.cpp
+# automatic
+# ? := cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp utils.cpp minhash/minhash.cpp minhash/fnv.cpp probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp accuracy_benchmark_test.cpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=2/14=14%
+#  recipe to execute (from 'Makefile', line 9):
+	$(CPP) $(fast)  -o cod_benchmark_test cod_benchmark_test.cpp lshensemble_benchmark_test.cpp bootstrap.cpp lshensemble.cpp  utils.cpp ./minhash/minhash.cpp ./minhash/fnv.cpp probability.cpp lshforest.cpp lsharray.cpp linearscan_benchmark_test.cpp accuracy_benchmark_test.cpp  $(serialize)
+
+# Not a target:
+minhash/fnv.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-25 09:55:59.833526
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 13:10:01.691238
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+utils.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 13:10:01.742587
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+lshforest.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 13:10:01.734144
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+accuracy_benchmark_test.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-15 00:06:19.428495
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 39):
+	rm -f cod_benchmark_test cod_benchmark_test.o minhash.o xxhash.o lsh.o lshensemble.o lshensemble_benchmark_test.o utils.o probability.o lshforest.o bootstrap.o
+
+# Not a target:
+cod_benchmark_test.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 13:10:01.70438
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+probability.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-15 16:08:49.380494
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+lshensemble.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 13:10:01.717478
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+bootstrap.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 13:10:01.695761
+#  File has been updated.
+#  Successfully updated.
+
+# files hash-table stats:
+# Load=17/1024=2%, Rehash=0, Collisions=0/41=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 49 / storage = 740 B / avg = 15 B
+# current buf: size = 8162 B / used = 740 B / count = 49 / avg = 15 B
+
+# strcache performance: lookups = 67 / hit rate = 26%
+# hash-table stats:
+# Load=49/8192=1%, Rehash=0, Collisions=1/67=1%
+# Finished Make data base on Sun Aug 28 13:12:23 2022
+
+ 
